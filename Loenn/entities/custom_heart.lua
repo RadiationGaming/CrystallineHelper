@@ -13,7 +13,7 @@ customHeart.placements = {
             respawnTime = 3,
             poemId = "",
             type = "Blue",
-            path = "heartGemColorable",
+            path = "CrystallineHelper/FLCC/heartGemColorable",
             color = "ff4fed",
             bloom = 0.75,
             light = true,
@@ -43,6 +43,9 @@ customHeart.fieldInformation = {
     dashCount = {
         fieldType = "integer",
     },
+    color = {
+        fieldType = "color",
+    },
 }
 
 local function getSprite(entity)
@@ -53,11 +56,11 @@ local function getSprite(entity)
     elseif entity.type == "Gold" then
         return "collectables/heartGem/2/00"
     elseif entity.type == "Custom" then
-        return "collectables/"..entity.path.."/00"
+        return "collectables/"..(entity.path == "heartGemColorable" ? "CrystallineHelper/FLCC/heartGemColorable" : entity.path).."/00"
     elseif entity.type == "Core" then
-        return "ahorn_customcoreheart"
+        return "CrystallineHelper/FLCC/ahorn_customcoreheart"
     elseif entity.type == "CoreInverted" then
-        return "ahorn_customcoreheartinverted"
+        return "CrystallineHelper/FLCC/ahorn_customcoreheartinverted"
     else
         return "collectables/heartGem/0/00"
     end

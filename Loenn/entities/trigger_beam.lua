@@ -105,7 +105,7 @@ function triggerBeam.sprite(room, entity)
         for j=0, math.floor(length/8)-1 do
             local drawx = bx + (dx * 8 * j) + 4 + ((dx < 0) and -8 or 0)
             local drawy = by + (dy * 8 * j) + 4 + ((dy < 0) and -8 or 0)
-            local arrow = drawableSprite.fromTexture("ahorn_triggerbeamdir", {x = drawx, y = drawy, rotation = rot})
+            local arrow = drawableSprite.fromTexture("CrystallineHelper/FLCC/ahorn_triggerbeamdir", {x = drawx, y = drawy, rotation = rot})
             table.insert(sprites, arrow)
         end
     end

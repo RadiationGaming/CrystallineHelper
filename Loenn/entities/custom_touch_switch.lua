@@ -45,7 +45,7 @@ function customTouchSwitch.sprite(room, entity)
 
     local iconResource = "objects/touchswitch/icon00"
     if entity.icon ~= "vanilla" then
-        iconResource = "objects/customMovingTouchSwitch/" .. entity.icon .."/icon00"
+        iconResource = "objects/" .. (entity.icon == "tall" or entity.icon == "triangle" or entity.icon == "circle" ? "CrystallineHelper/FLCC/" : "") .. "customMovingTouchSwitch/" .. entity.icon .."/icon00"
     end
 
     local iconSprite = drawableSprite.fromTexture(iconResource, entity)

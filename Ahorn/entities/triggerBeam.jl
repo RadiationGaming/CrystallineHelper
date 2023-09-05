@@ -147,7 +147,7 @@ function Ahorn.render(ctx::Ahorn.Cairo.CairoContext, entity::TriggerBeam, room::
         for j in 0:(floor(Int, length / 8) - 1)
             drawx = bx - x + (dx * 8 * j) + 4 + (dy > 0 ? 8 : 0)
             drawy = by - y + (dy * 8 * j) + 4 + (dx < 0 ? 8 : 0)
-            Ahorn.drawSprite(ctx, "ahorn_triggerbeamdir", drawx, drawy, rot = rot, tint = color, alpha = 0.25)
+            Ahorn.drawSprite(ctx, "CrystallineHelper/FLCC/ahorn_triggerbeamdir", drawx, drawy, rot = rot, tint = color, alpha = 0.25)
         end
     end
 end

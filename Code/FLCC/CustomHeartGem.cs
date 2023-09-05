@@ -82,6 +82,8 @@ namespace vitmod
 		private List<InvisibleBarrier> walls;
 		private HoldableCollider holdableCollider;
 
+        private const string DEFAULT_PATH = "CrystallineHelper/FLCC/heartGemColorable";
+
 		public CustomHeartGem(EntityData data, Vector2 offset) : base(data.Position + offset)
 		{
 			entityID = new EntityID(data.Level.Name, data.ID);
@@ -92,7 +94,11 @@ namespace vitmod
 			dashCount = data.Int("dashCount", 1);
 			poemId = data.Attr("poemId");
 			spriteType = data.Enum<SpriteType>("type");
-			spritePath = $"collectables/{data.Attr("path", "heartGemColorable")}/";
+			spritePath = $"collectables/{data.Attr("path", DEFAULT_PATH)}/";
+            // handle legacy FLCC path
+            if (spritePath == "collectables/heartGemColorable/") {
+                spritePath = $"collectables/{DEFAULT_PATH}/";
+            }
 			spriteColor = data.Attr("color", "ffffff");
 			bloomStr = data.Float("bloom", 0.75f);
 			hasLight = data.Bool("light", true);
