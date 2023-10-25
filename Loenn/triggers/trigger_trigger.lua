@@ -19,6 +19,7 @@ local activationTypes = {
     ["Touched Solid"] = "OnSolid",
     ["Entity Entered"] = "OnEntityEnter",
     ["On Input"] = "OnInput",
+    ["Grounded"] = "OnGrounded",
 }
 
 local comparisonTypes = {

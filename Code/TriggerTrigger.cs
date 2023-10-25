@@ -313,6 +313,9 @@ namespace vitmod {
                             break;
                     }
                     break;
+                case ActivationTypes.OnGrounded:
+                    result = player.OnGround();
+                    break;
                 default:
                     result = false;
                     break;
@@ -517,6 +520,7 @@ namespace vitmod {
             OnSolid,
             OnEntityEnter,
             OnInput,
+            OnGrounded,
         };
         public enum RandomizationTypes {
             FileTimer,
