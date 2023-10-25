@@ -288,6 +288,7 @@ namespace vitmod
             KaizoBlock.Load();
             FlagSequenceController.Load();
             DashCodeDisplay.Load();
+            CoyoteBounceTrigger.Load();
 
             BombTimerTrigger.Load();
             CustomPuffer.Load();
@@ -461,7 +462,7 @@ namespace vitmod
                 useNoMoveDelta = false;
             }
 
-            orig(self);
+			orig(self);
         }
 
         private void EntityList_Update(ILContext il) {
@@ -616,12 +617,15 @@ namespace vitmod
             TimeCrystal.stopTimer = 0f;
             TimeCrystal.stopStage = 0;
             timeStopScaleTimer = 0f;
+            CoyoteBounceTrigger.CoyoteTriggerInside = null;
             orig(self);
         }
 
         private void Player_Update(On.Celeste.Player.orig_Update orig, Player self)
         {
             orig(self);
+
+            // star crystal
             rainbowTimer += Engine.DeltaTime;
             if (StarCrystal.starDashTimer > 0f)
             {
@@ -639,6 +643,11 @@ namespace vitmod
             {
                 self.Stamina = 110f;
                 StarCrystal.starStaminaTimer -= Engine.DeltaTime;
+            }
+
+            // coyote bounce trigger;
+            if (CoyoteBounceTrigger.GroundedOverride > 0f) {
+                CoyoteBounceTrigger.GroundedOverride -= Engine.DeltaTime;
             }
         }
 
@@ -797,6 +806,7 @@ namespace vitmod
             KaizoBlock.Unload();
             FlagSequenceController.Unload();
             DashCodeDisplay.Unload();
+            CoyoteBounceTrigger.Unload();
 
             BombTimerTrigger.Unload();
             CustomPuffer.Unload();
