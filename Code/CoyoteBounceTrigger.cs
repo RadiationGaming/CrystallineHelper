@@ -55,8 +55,8 @@ namespace vitmod {
             cursor.Emit(OpCodes.Ldarg_0);
 			cursor.Emit(OpCodes.Ldarg, dataArg);
 			cursor.Emit<CollisionData>(OpCodes.Ldfld, "Direction");
-			cursor.EmitDelegate(HookDashCollision);
-		}
+            cursor.EmitDelegate<Action<DashCollisionResults, Player, Vector2>>(HookDashCollision);
+        }
 
         private static void HookDashCollision(DashCollisionResults result, Player player, Vector2 direction)
         {
