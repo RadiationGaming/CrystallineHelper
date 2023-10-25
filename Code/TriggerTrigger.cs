@@ -47,6 +47,7 @@ namespace vitmod {
             waitTime = data.Float("timeToWait", 0f);
             coreMode = data.Enum("coreMode", Session.CoreModes.None);
             inputType = data.Enum("inputType", InputTypes.Grab);
+            ifSafe = data.Bool("onlyIfSafe", false);
             if (string.IsNullOrEmpty(data.Attr("entityType", ""))) {
                 collideType = data.Attr("entityTypeToCollide", "Celeste.Strawberry");
             } else {
@@ -315,6 +316,8 @@ namespace vitmod {
                     break;
                 case ActivationTypes.OnGrounded:
                     result = player.OnGround();
+                    if (ifSafe)
+                        result &= player.OnSafeGround;
                     break;
                 default:
                     result = false;
@@ -485,6 +488,7 @@ namespace vitmod {
         private int collideCount;
         private Session.CoreModes coreMode;
         private InputTypes inputType;
+        private bool ifSafe;
         private List<Entity> entitiesInside;
         private string collideSolid;
         public bool externalActivation;

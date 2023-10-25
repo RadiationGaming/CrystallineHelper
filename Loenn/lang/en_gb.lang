@@ -364,6 +364,7 @@ triggers.vitellary/triggertrigger.attributes.description.coreMode=Core mode the 
 triggers.vitellary/triggertrigger.attributes.description.entityType=Class name of the type of entity to check.
 triggers.vitellary/triggertrigger.attributes.description.solidType=Class name of the type of solid to check. If left blank, the trigger will allow any solids to be considered.
 triggers.vitellary/triggertrigger.attributes.description.inputType=The type of input the player needs to press.
+triggers.vitellary/triggertrigger.attributes.description.onlyIfSafe=Whether the floor the player is standing on needs to be safe ground (aka. ground that a berry could be collected on).
 
 # Edit Depth Trigger
 triggers.vitellary/editdepthtrigger.attributes.description.depth=New depth to set the entity to. Lower / negative values will make the entities render above others.
