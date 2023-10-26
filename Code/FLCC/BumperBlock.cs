@@ -32,7 +32,7 @@ namespace vitmod
 		{
 			OnDashCollide = new DashCollision(OnDashed);
 
-			Add(face = GFX.SpriteBank.Create("bumperBlock_face"));
+			Add(face = GFX.SpriteBank.Create("crystalline_flcc_bumperBlock_face"));
 			face.Position = new Vector2(Width, Height) / 2f;
 			face.Play("idle");
 			face.OnLastFrame = (frame) =>
@@ -44,7 +44,7 @@ namespace vitmod
 				}
 			};
 
-			List<MTexture> atlasSubtextures = GFX.Game.GetAtlasSubtextures("objects/bumperBlock/block");
+			List<MTexture> atlasSubtextures = GFX.Game.GetAtlasSubtextures("objects/CrystallineHelper/FLCC/bumperBlock/block");
 			MTexture idle;
 
 			Axes axes = data.Enum("axes", Axes.Both);
@@ -123,7 +123,7 @@ namespace vitmod
 			{
 				if (borderX < 0)
 				{
-					Image image4 = new Image(GFX.Game["objects/bumperBlock/lit_left"].GetSubtexture(0, ty * 8, 8, 8));
+					Image image4 = new Image(GFX.Game["objects/CrystallineHelper/FLCC/bumperBlock/lit_left"].GetSubtexture(0, ty * 8, 8, 8));
 					activeLeftImages.Add(image4);
 					image4.Position = vector;
 					image4.Visible = false;
@@ -131,7 +131,7 @@ namespace vitmod
 				}
 				else if (borderX > 0)
 				{
-					Image image5 = new Image(GFX.Game["objects/bumperBlock/lit_right"].GetSubtexture(0, ty * 8, 8, 8));
+					Image image5 = new Image(GFX.Game["objects/CrystallineHelper/FLCC/bumperBlock/lit_right"].GetSubtexture(0, ty * 8, 8, 8));
 					activeRightImages.Add(image5);
 					image5.Position = vector;
 					image5.Visible = false;
@@ -139,7 +139,7 @@ namespace vitmod
 				}
 				if (borderY < 0)
 				{
-					Image image6 = new Image(GFX.Game["objects/bumperBlock/lit_top"].GetSubtexture(tx * 8, 0, 8, 8));
+					Image image6 = new Image(GFX.Game["objects/CrystallineHelper/FLCC/bumperBlock/lit_top"].GetSubtexture(tx * 8, 0, 8, 8));
 					activeTopImages.Add(image6);
 					image6.Position = vector;
 					image6.Visible = false;
@@ -147,7 +147,7 @@ namespace vitmod
 				}
 				else if (borderY > 0)
 				{
-					Image image7 = new Image(GFX.Game["objects/bumperBlock/lit_bottom"].GetSubtexture(tx * 8, 0, 8, 8));
+					Image image7 = new Image(GFX.Game["objects/CrystallineHelper/FLCC/bumperBlock/lit_bottom"].GetSubtexture(tx * 8, 0, 8, 8));
 					activeBottomImages.Add(image7);
 					image7.Position = vector;
 					image7.Visible = false;

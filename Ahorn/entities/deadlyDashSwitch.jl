@@ -60,13 +60,13 @@ function Ahorn.render(ctx::Ahorn.Cairo.CairoContext, entity::DeadSwitch, room::M
     dir = get(entity.data, "direction", "Left")
 	
 	if dir == "Left"
-        Ahorn.drawSprite(ctx, "objects/deadlyDashButton/dashButton00.png", 7, 8)
+        Ahorn.drawSprite(ctx, "objects/CrystallineHelper/FLCC/deadlyDashButton/dashButton00.png", 7, 8)
     elseif dir == "Right"
-		Ahorn.drawSprite(ctx, "objects/deadlyDashButton/dashButton00.png", 49, 56, rot=pi)
+		Ahorn.drawSprite(ctx, "objects/CrystallineHelper/FLCC/deadlyDashButton/dashButton00.png", 49, 56, rot=pi)
 	elseif dir == "Up"
-		Ahorn.drawSprite(ctx, "objects/deadlyDashButton/dashButton00.png", 56, 7, rot=pi / 2)
+		Ahorn.drawSprite(ctx, "objects/CrystallineHelper/FLCC/deadlyDashButton/dashButton00.png", 56, 7, rot=pi / 2)
 	elseif dir == "Down"
-		Ahorn.drawSprite(ctx, "objects/deadlyDashButton/dashButton00.png", 8, 49, rot=-pi / 2)
+		Ahorn.drawSprite(ctx, "objects/CrystallineHelper/FLCC/deadlyDashButton/dashButton00.png", 8, 49, rot=-pi / 2)
     end
 end
 

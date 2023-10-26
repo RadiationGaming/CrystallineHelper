@@ -10,8 +10,9 @@ namespace vitmod
 {
     [Tracked]
     [CustomEntity("vitellary/flagcrystal")]
-    public class FlagCrystal : Actor
-    {
+    public class FlagCrystal : Actor {
+        private const string DEFAULT_PATH = "CrystallineHelper/FLCC/flagcrystal";
+        
         public FlagCrystal(EntityData data, Vector2 offset, EntityID id) : base(data.Position + offset)
         {
             ID = id;
@@ -28,11 +29,15 @@ namespace vitmod
             Depth = 100;
             Collider = new Hitbox(8f, 10f, -4f, -10f);
             Facing = Facings.Left;
-            var customSprite = $"objects/{data.Attr("sprite", "flagcrystal")}";
-            Add(backSprite = new Image(GFX.Game.Has($"{customSprite}/back") ? GFX.Game[$"{customSprite}/back"] : GFX.Game["objects/flagcrystal/back"]));
-            Add(theoSprite = new Image(GFX.Game.Has($"{customSprite}/theo") ? GFX.Game[$"{customSprite}/theo"] : GFX.Game["objects/flagcrystal/theo"]));
+            var customSprite = $"objects/{data.Attr("sprite", DEFAULT_PATH)}";
+            // handle legacy FLCC path
+            if (customSprite == "objects/flagcrystal") {
+                customSprite = $"objects/{DEFAULT_PATH}";
+            }
+            Add(backSprite = new Image(GFX.Game.Has($"{customSprite}/back") ? GFX.Game[$"{customSprite}/back"] : GFX.Game["objects/CrystallineHelper/FLCC/flagcrystal/back"]));
+            Add(theoSprite = new Image(GFX.Game.Has($"{customSprite}/theo") ? GFX.Game[$"{customSprite}/theo"] : GFX.Game["objects/CrystallineHelper/FLCC/flagcrystal/theo"]));
             theoSprite.Visible = isTheo;
-            Add(frontSprite = new Image(GFX.Game.Has($"{customSprite}/front") ? GFX.Game[$"{customSprite}/front"] : GFX.Game["objects/flagcrystal/front"]));
+            Add(frontSprite = new Image(GFX.Game.Has($"{customSprite}/front") ? GFX.Game[$"{customSprite}/front"] : GFX.Game["objects/CrystallineHelper/FLCC/flagcrystal/front"]));
             backSprite.Scale.X = theoSprite.Scale.X = frontSprite.Scale.X = -1f;
             Vector2 spriteOffset = new Vector2(10f, 22f);
             backSprite.Origin = spriteOffset;

@@ -25,7 +25,7 @@ deadlySwitch.fieldInformation = {
 
 deadlySwitch.justification = {0.5, 0.5}
 function deadlySwitch.sprite(room, entity)
-    local sprite = drawableSprite.fromTexture("objects/deadlyDashButton/dashButton00", entity)
+    local sprite = drawableSprite.fromTexture("objects/CrystallineHelper/FLCC/deadlyDashButton/dashButton00", entity)
     if entity.direction == "Right" then
         sprite.rotation = math.pi
         sprite:addPosition(0, 8)

@@ -59,7 +59,7 @@ function Ahorn.render(ctx::Ahorn.Cairo.CairoContext, entity::CustomMovingTouchSw
 
     sprite = "objects/touchswitch/icon00.png"
     if icon != "vanilla"
-        sprite = "objects/customMovingTouchSwitch/"*icon*"/icon00.png"
+        sprite = "objects/" * (icon in iconTypes ? "CrystallineHelper/FLCC/" : "") * "customMovingTouchSwitch/"*icon*"/icon00.png"
     end
 
     Ahorn.drawSprite(ctx, "objects/touchswitch/container.png", 0, 0)

@@ -36,17 +36,17 @@ function Ahorn.renderAbs(ctx::Ahorn.Cairo.CairoContext, entity::Checkpoint, room
     
     for i in 0:(floor(Int, height / 8) - 1)
         if i == 0
-            Ahorn.drawImage(ctx, "objects/smwCheckpoint/bars", x, y, 0, 0, 4, 8)
+            Ahorn.drawImage(ctx, "objects/CrystallineHelper/FLCC/smwCheckpoint/bars", x, y, 0, 0, 4, 8)
         else
-            Ahorn.drawImage(ctx, "objects/smwCheckpoint/bars", x, y + i*8, 0, 8, 4, 8)
+            Ahorn.drawImage(ctx, "objects/CrystallineHelper/FLCC/smwCheckpoint/bars", x, y + i*8, 0, 8, 4, 8)
         end
     end
     Ahorn.drawImage(ctx, "objects/smwCheckpoint/cp", x+2, barHeight)
     for i in 0:(floor(Int, height / 8) - 1)
         if i == 0
-            Ahorn.drawImage(ctx, "objects/smwCheckpoint/bars", x + 12, y, 4, 0, 4, 8)
+            Ahorn.drawImage(ctx, "objects/CrystallineHelper/FLCC/smwCheckpoint/bars", x + 12, y, 4, 0, 4, 8)
         else
-            Ahorn.drawImage(ctx, "objects/smwCheckpoint/bars", x + 12, y + i*8, 4, 8, 4, 8)
+            Ahorn.drawImage(ctx, "objects/CrystallineHelper/FLCC/smwCheckpoint/bars", x + 12, y + i*8, 4, 8, 4, 8)
         end
     end
 end

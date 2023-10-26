@@ -85,7 +85,7 @@ namespace vitmod
 			Add(new PlayerCollider(OnPlayer, new Hitbox(14f, 12f, -7f, -7f)));
 			Add(sprite = GFX.SpriteBank.Create(spriteName));
 			sprite.Play("idle");
-			Add(happySprite = GFX.SpriteBank.Create("flccSmileyPuffer"));
+			Add(happySprite = GFX.SpriteBank.Create("crystalline_flccSmileyPuffer"));
 			happySprite.Play("idle");
 			happySprite.Visible = false;
 			if (!faceRight)

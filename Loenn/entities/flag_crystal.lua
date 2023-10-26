@@ -11,7 +11,7 @@ flagCrystal.placements = {
             flag = "",
             spawnFlag = "",
             color = "ffffff",
-            sprite = "flagCrystal",
+            sprite = "CrystallineHelper/FLCC/flagCrystal",
             theo = false,
         }
     }
@@ -19,7 +19,7 @@ flagCrystal.placements = {
 
 flagCrystal.justification = {0.5, 1}
 function flagCrystal.sprite(room, entity)
-    local path = "objects/"..entity.sprite.."/"
+    local path = "objects/"..(entity.sprite == "flagcrystal" ? "CrystallineHelper/FLCC/flagcrystal" : entity.sprite).."/"
     local tint = utils.getColor(entity.color)
     local sprites = {}
 

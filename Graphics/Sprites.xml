@@ -43,40 +43,40 @@
     <Anim id="flash" path="" delay="0.05" frames="3-6,7*3,8*2" goto="idle"/>
   </kaizoblock>
 
-  <fastBumpBlockCenterFire path="objects/BumpBlockNew/" start="idle">
+  <crystalline_flcc_fastBumpBlockCenterFire path="objects/BumpBlockNew/" start="idle">
     <Center/>
     <Loop id="idle" path="fire_center" frames="2-6" delay="0.08"/>
-  </fastBumpBlockCenterFire>
-  <fastBumpBlockCenterIce path="objects/BumpBlockNew/" start="idle">
+  </crystalline_flcc_fastBumpBlockCenterFire>
+  <crystalline_flcc_fastBumpBlockCenterIce path="objects/BumpBlockNew/" start="idle">
     <Center/>
     <Loop id="idle" path="ice_center" frames="0,2,4-6" delay="0.1"/>
-  </fastBumpBlockCenterIce>
-  <dashSwitch_deadly path="objects/deadlyDashButton/dashButton" start="idle">
+  </crystalline_flcc_fastBumpBlockCenterIce>
+  <dashSwitch_crystalline_flcc_deadly path="objects/CrystallineHelper/FLCC/deadlyDashButton/dashButton" start="idle">
     <Justify x="0.5" y="0.5"/>
     <Loop id="idle" path="" delay="0.06" frames="0-20"/>
     <Loop id="pushed" path="" delay="0.08" frames="27"/>
     <Anim id="push" path="" delay="0.07" frames="21-27" goto="pushed"/>
-  </dashSwitch_deadly>
-  <energyBooster path="objects/energyBooster/" start="loop">
+  </dashSwitch_crystalline_flcc_deadly>
+  <crystalline_flcc_energyBooster path="objects/CrystallineHelper/FLCC/energyBooster/" start="loop">
     <Justify x="0.5" y="0.5"/>
     <Loop id="loop" path="booster" delay="0.1" frames="0-4"/>
     <Loop id="inside" path="booster" delay="0.1" frames="5-8"/>
     <Loop id="spin" path="booster" delay="0.06" frames="18-25"/>
     <Anim id="pop" path="booster" delay="0.08" frames="9-17"/>
-  </energyBooster>
-  <energyBoosterRedirect path="objects/energyBoosterRedirect/" start="loop">
+  </crystalline_flcc_energyBooster>
+  <crystalline_flcc_energyBoosterRedirect path="objects/CrystallineHelper/FLCC/energyBoosterRedirect/" start="loop">
     <Justify x="0.5" y="0.5"/>
     <Loop id="loop" path="booster" delay="0.1" frames="0-4"/>
     <Loop id="inside" path="booster" delay="0.1" frames="5-8"/>
     <Loop id="spin" path="booster" delay="0.06" frames="18-25"/>
     <Anim id="pop" path="booster" delay="0.08" frames="9-17"/>
-  </energyBoosterRedirect>
-  <bumperBlock_face path="objects/bumperBlock/" start="idle">
+  </crystalline_flcc_energyBoosterRedirect>
+  <crystalline_flcc_bumperBlock_face path="objects/CrystallineHelper/FLCC/bumperBlock/" start="idle">
     <Center/>
     <Loop id="idle" path="idle_face" delay="0.08"/>
     <Anim id="hit" path="hit" delay="0.08" goto="idle"/>
-  </bumperBlock_face>
-  <flccSmileyPuffer path="objects/flccSmileyPuffer/" start="idle">
+  </crystalline_flcc_bumperBlock_face>
+  <crystalline_flccSmileyPuffer path="objects/CrystallineHelper/FLCC/flccSmileyPuffer/" start="idle">
     <Center/>
     <Loop id="idle" path="idle" delay="0.08"/>
     <Anim id="alert" path="alert" goto="alerted" delay="0.08"/>
@@ -85,5 +85,5 @@
     <Anim id="unalert" path="alert" goto="idle" delay="0.08" frames="1,0"/>
     <Loop id="hidden" path="hidden" delay="0.08"/>
     <Anim id="recover" path="recover" goto="idle" delay="0.05"/>
-  </flccSmileyPuffer>
+  </crystalline_flccSmileyPuffer>
 </Sprites>

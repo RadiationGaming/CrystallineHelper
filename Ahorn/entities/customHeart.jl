@@ -2,7 +2,7 @@ module FlushelineCustomHeart
 
 using ..Ahorn, Maple
 
-@mapdef Entity "vitellary/customheart" CustomHeart(x::Integer, y::Integer, slowdown::Bool=false, endLevel::Bool=false, oneUse::Bool=false, respawnTime::Number=3.0, poemId::String="", type::String="Blue", path::String="heartGemColorable", color::String="ff4fed", bloom::Number=0.75, light::Bool=true, bully::Bool=false, additionalEffects::Bool=true, switchCoreMode::Bool=false, colorGrade::Bool=false, static::Bool=false, dashCount::Integer=1, poemCutscene::Bool=true)
+@mapdef Entity "vitellary/customheart" CustomHeart(x::Integer, y::Integer, slowdown::Bool=false, endLevel::Bool=false, oneUse::Bool=false, respawnTime::Number=3.0, poemId::String="", type::String="Blue", path::String="CrystallineHelper/FLCC/heartGemColorable", color::String="ff4fed", bloom::Number=0.75, light::Bool=true, bully::Bool=false, additionalEffects::Bool=true, switchCoreMode::Bool=false, colorGrade::Bool=false, static::Bool=false, dashCount::Integer=1, poemCutscene::Bool=true)
 
 const placements = Ahorn.PlacementDict(
     "Custom Fake Heart (Crystalline)" => Ahorn.EntityPlacement(
@@ -27,11 +27,14 @@ function getSprites(entity::CustomHeart)
     elseif type == "Gold"
         return String["collectables/heartGem/2/00.png"]
     elseif type == "Core"
-        return String["ahorn_customcoreheart.png"]
+        return String["CrystallineHelper/FLCC/ahorn_customcoreheart.png"]
     elseif type == "CoreInverted"
-        return String["ahorn_customcoreheartinverted.png"]
+        return String["CrystallineHelper/FLCC/ahorn_customcoreheartinverted.png"]
     elseif type == "Custom"
         path = get(entity.data, "path", "")
+        if path == "heartGemColorable"
+            path = "CrystallineHelper/FLCC/heartGemColorable"
+        end
         return String["collectables/"*path*"/00.png", "collectables/"*path*"/outline00.png"]
     end
 
