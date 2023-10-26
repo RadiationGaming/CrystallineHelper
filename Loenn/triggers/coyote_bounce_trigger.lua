@@ -7,9 +7,13 @@ coyoteBounceTrigger.fieldInformation = {
         minimumValue = 0.0
     },
     directions = {
-        options = {"Top", "TopAndSides", "AllDirections"},
+        options = {"None", "Top", "TopAndSides", "AllDirections"},
         editable = false
-    }
+    },
+    refillDirections = {
+        options = {"MatchCoyote", "None", "Top", "TopAndSides", "AllDirections"},
+        editable = false
+    },
 }
 
 coyoteBounceTrigger.placements = {
@@ -18,7 +22,7 @@ coyoteBounceTrigger.placements = {
         data = {
             directions = "Top",
             time = 0.1,
-            refill = true,
+            refillDirections = "MatchCoyote",
             setGrounded = false,
         }
     }
