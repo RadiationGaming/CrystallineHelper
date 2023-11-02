@@ -65,7 +65,7 @@ namespace vitmod {
                 }
             }));
             if (activationType == ActivationTypes.OnInteraction) {
-                Add(new TalkComponent(
+                Add(talker = new TalkComponent(
                     new Rectangle(0, 0, (int)Width, (int)Height),
                     new Vector2(data.Int("talkBubbleX", (int)Width / 2), data.Int("talkBubbleY", 0)),
                     (player) => {
@@ -124,7 +124,7 @@ namespace vitmod {
             if (!Global) {
                 TryActivate(player);
                 if (Activated && oneUse) {
-                    RemoveSelf();
+                    TryRemove();
                 }
             }
         }
@@ -156,7 +156,7 @@ namespace vitmod {
 
             if (Activated) {
                 if (oneUse) {
-                    RemoveSelf();
+                    TryRemove();
                 } else {
                     UpdateTriggers(player);
                 }
@@ -423,6 +423,31 @@ namespace vitmod {
             chosenTrigger?.OnStay(player);
         }
 
+        private void TryRemove() {
+            switch (activationType) {
+                case ActivationTypes.OnInteraction:
+                    Collidable = false;
+                    Add(new Coroutine(InteractExit()));
+                    break;
+                default:
+                    RemoveSelf();
+                    break;
+            }
+        }
+
+        private IEnumerator InteractExit() {
+            if (talker == null) {
+                RemoveSelf();
+                yield break;
+            }
+            talker.Enabled = false;
+            while (talker.UI.slide > 0) {
+                yield return null;
+            }
+            RemoveSelf();
+            yield break;
+        }
+
         private static void Player_Jump(On.Celeste.Player.orig_Jump orig, Player self, bool particles, bool playSfx) {
             orig(self, particles, playSfx);
             if (self == null) { return; }
@@ -489,6 +514,7 @@ namespace vitmod {
         private Session.CoreModes coreMode;
         private InputTypes inputType;
         private bool ifSafe;
+        private TalkComponent talker;
         private List<Entity> entitiesInside;
         private string collideSolid;
         public bool externalActivation;
