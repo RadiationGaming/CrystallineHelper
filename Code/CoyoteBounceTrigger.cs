@@ -65,20 +65,17 @@ namespace vitmod {
             if (bouncer == null)
                 return;
 
-            if ((direction.Y < 0f && bouncer.directions != BounceDirections.AllDirections) || (direction.X != 0f && bouncer.directions == BounceDirections.Top))
-                return;
+            if (CoyoteBounceTrigger.MatchDirection(direction, bouncer.directions)) {
+                player.jumpGraceTimer = bouncer.time;
+                if (bouncer.setGrounded) {
+                    CoyoteBounceTrigger.GroundedOverride = bouncer.time;
+                }
+            }
 
-			player.jumpGraceTimer = bouncer.time;
-
-			if (bouncer.refill)
+			if (CoyoteBounceTrigger.MatchDirection(direction, bouncer.refill))
 			{
 				player.RefillDash();
 				player.RefillStamina();
-			}
-
-			if (bouncer.setGrounded)
-			{
-				CoyoteBounceTrigger.GroundedOverride = bouncer.time;
 			}
 		}
 
@@ -90,7 +87,7 @@ namespace vitmod {
 
 		public BounceDirections directions;
 		public float time;
-        public bool refill;
+        public BounceDirections refill;
         public bool setGrounded;
 
         public static CoyoteBounceTrigger CoyoteTriggerInside;
@@ -99,7 +96,11 @@ namespace vitmod {
         public CoyoteBounceTrigger(EntityData data, Vector2 offset) : base(data, offset) {
             directions = data.Enum("directions", BounceDirections.Top);
             time = data.Float("time", 0.1f);
-            refill = data.Bool("refill", true);
+            if (data.Has("refill") || data.Attr("refillDirections", "Top") == "MatchCoyote") {
+                refill = directions;
+            } else {
+                refill = data.Enum("refillDirections", BounceDirections.Top);
+            }
             setGrounded = data.Bool("setGrounded", false);
         }
 
@@ -126,9 +127,16 @@ namespace vitmod {
 
         public enum BounceDirections
         {
+            None,
             Top,
             TopAndSides,
             AllDirections
+        }
+        public static bool MatchDirection(Vector2 direction, BounceDirections bounceDirections) {
+            if (bounceDirections == BounceDirections.None)
+                return false;
+
+            return !((direction.Y < 0f && bounceDirections != BounceDirections.AllDirections) || (direction.X != 0f && bounceDirections == BounceDirections.Top));
         }
     }
 }
