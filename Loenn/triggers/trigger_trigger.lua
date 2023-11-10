@@ -85,6 +85,7 @@ function triggerTrigger.ignoredFields(entity)
         "solidType",
         "entityType",
         "inputType",
+        "onlyIfSafe",
     }
 
     local function doNotIgnore(value)
