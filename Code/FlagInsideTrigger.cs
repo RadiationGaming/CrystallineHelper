@@ -26,10 +26,5 @@ namespace vitmod {
             base.OnLeave(player);
             SceneAs<Level>().Session.SetFlag(flag, false);
         }
-
-        public override void Removed(Scene scene) {
-            base.Removed(scene);
-            SceneAs<Level>().Session.SetFlag(flag, false);
-        }
     }
 }
