@@ -103,6 +103,7 @@ triggers.vitellary/bombtimer.placements.name.bomb_timer=Bomb Timer Trigger
 triggers.vitellary/dropholdables.placements.name.drop_holdables=Drop Holdable Trigger
 triggers.vitellary/roomnametrigger.placements.name.room_name_trigger=Room Name Trigger
 triggers.vitellary/coyotebounce.placements.name.coyote_bounce=Coyote Bounce Trigger
+triggers.vitellary/flaginsidetrigger.placements.name.flag_inside=Flag Inside Trigger
 
 # Effects
 
@@ -399,6 +400,9 @@ triggers.vitellary/roomnametrigger.attributes.description.roomName=The text to a
 triggers.vitellary/coyotebounce.attributes.description.time=The amount of time the player should gain coyote frames for.\nThe vanilla amount is 0.1, or about 5 frames.
 triggers.vitellary/coyotebounce.attributes.description.refill=Whether the player should also refill dashes and stamina when bouncing.
 triggers.vitellary/coyotebounce.attributes.description.setGrounded=Whether the player should be considered grounded during the coyote frame period.\nThis is NOT the vanilla behavior, and may be jank.
+
+# Flag Inside Trigger
+triggers.vitellary/flaginsidetrigger.attributes.description.flag=The flag to set while the player is inside the trigger.
 
 # Flag Sequence On Spawn Controller
 entities.vitellary/flagsequencecontroller.attributes.description.startNumber=The first number to start the sequence.
