@@ -17,13 +17,27 @@ local activationTypes = {
     ["Core Mode"] = "CoreMode",
     ["On Interaction"] = "OnInteraction",
     ["Touched Solid"] = "OnSolid",
-    ["Entity Entered"] = "OnEntityEnter"
+    ["Entity Entered"] = "OnEntityEnter",
+    ["On Input"] = "OnInput",
+    ["Grounded"] = "OnGrounded",
 }
 
 local comparisonTypes = {
     "LessThan",
     "EqualTo",
     "GreaterThan"
+}
+
+local inputTypes = {
+    "Left",
+    "Right",
+    "Up",
+    "Down",
+    "Jump",
+    "Dash",
+    "Grab",
+    "Interact",
+    "CrouchDash",
 }
 
 local triggerTrigger = {}
@@ -42,10 +56,14 @@ triggerTrigger.fieldInformation = {
         editable = false,
         options = comparisonTypes
     },
+    inputType = {
+        editable = false,
+        options = inputTypes
+    },
     coreMode = {
         editable = false,
         options = enums.core_modes
-    }
+    },
 }
 
 function triggerTrigger.ignoredFields(entity)
@@ -65,7 +83,9 @@ function triggerTrigger.ignoredFields(entity)
         "entityTypeToCollide",
         "collideCount",
         "solidType",
-        "entityType"
+        "entityType",
+        "inputType",
+        "onlyIfSafe",
     }
 
     local function doNotIgnore(value)
@@ -107,6 +127,10 @@ function triggerTrigger.ignoredFields(entity)
         doNotIgnore("solidType")
     elseif atype == "OnEntityEnter" then
         doNotIgnore("entityType")
+    elseif atype == "OnInput" then
+        doNotIgnore("inputType")
+    elseif atype == "OnGrounded" then
+        doNotIgnore("onlyIfSafe")
     end
 
     if iscomparison then
@@ -143,7 +167,9 @@ for _, mode in pairs(activationTypes) do
             onlyOnEnter = false,
             collideCount = 1,
             solidType = "",
-            entityType = ""
+            entityType = "",
+            inputType = "Grab",
+            onlyIfSafe = false,
         }
     }
     table.insert(triggerTrigger.placements, placement)

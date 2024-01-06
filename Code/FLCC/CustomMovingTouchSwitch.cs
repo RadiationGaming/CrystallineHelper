@@ -58,7 +58,7 @@ namespace vitmod
 			smoke = data.Bool("smoke", true);
 			badelineDeactivate = data.Bool("badelineDeactivate");
 			var iconName = data.Attr("icon", "vanilla");
-			icon = new Sprite(GFX.Game, iconName == "vanilla" ? "objects/touchswitch/icon" : $"objects/customMovingTouchSwitch/{iconName}/icon");
+			icon = new Sprite(GFX.Game, iconName == "vanilla" ? "objects/touchswitch/icon" : $"objects/{(iconName is "tall" or "triangle" or "circle" ? "CrystallineHelper/FLCC/" : "")}customMovingTouchSwitch/{iconName}/icon");
 
 			Depth = 2000;
 			Switch = string.IsNullOrEmpty(flag) ? (ISwitch)new BasicSwitch() : (ISwitch)new FlagSwitch(flag, inverted, allowDisable);

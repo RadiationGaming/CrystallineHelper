@@ -26,13 +26,13 @@ const placements = Ahorn.PlacementDict(
 )
 
 const frameImage = Dict{String, String}(
-    "none" => "objects/bumperBlock/block00",
-    "horizontal" => "objects/bumperBlock/block01",
-    "vertical" => "objects/bumperBlock/block02",
-    "both" => "objects/bumperBlock/block03"
+    "none" => "objects/CrystallineHelper/FLCC/bumperBlock/block00",
+    "horizontal" => "objects/CrystallineHelper/FLCC/bumperBlock/block01",
+    "vertical" => "objects/CrystallineHelper/FLCC/bumperBlock/block02",
+    "both" => "objects/CrystallineHelper/FLCC/bumperBlock/block03"
 )
 
-const face = "objects/bumperBlock/idle_face"
+const face = "objects/CrystallineHelper/FLCC/bumperBlock/idle_face"
 const faceColor = (98, 34, 43) ./ 255
 const bumperAxes = String["both", "horizontal", "vertical"]
 

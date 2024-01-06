@@ -28,7 +28,7 @@ namespace vitmod
             }
             Add(new PlayerCollider(OnPlayer));
             Depth = 1;
-            checkpoint = new Image(GFX.Game["objects/smwCheckpoint/cp"]);
+            checkpoint = new Image(GFX.Game["objects/CrystallineHelper/FLCC/smwCheckpoint/cp"]);
             checkpoint.Position = new Vector2(2, barHeight);
             Add(checkpoint);
         }
@@ -62,7 +62,7 @@ namespace vitmod
         {
             public BarRenderer(Vector2 position, bool fg, float height) : base(position)
             {
-                MTexture bars = GFX.Game["objects/smwCheckpoint/bars"];
+                MTexture bars = GFX.Game["objects/CrystallineHelper/FLCC/smwCheckpoint/bars"];
                 Depth = fg ? -9000 : 100;
                 for (int i = 0; i < height; i += 8)
                 {

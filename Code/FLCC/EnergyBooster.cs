@@ -47,7 +47,7 @@ namespace vitmod
 
 			Depth = -8500;
 			Collider = new Circle(10f, 0f, 2f);
-			Add(sprite = GFX.SpriteBank.Create(!redirectSpeed ? "energyBooster" : "energyBoosterRedirect"));
+			Add(sprite = GFX.SpriteBank.Create(!redirectSpeed ? "crystalline_flcc_energyBooster" : "crystalline_flcc_energyBoosterRedirect"));
 			Add(new PlayerCollider(OnPlayer));
 			Add(light = new VertexLight(Color.White, 1f, 16, 32));
 			Add(bloom = new BloomPoint(0.1f, 16f));
@@ -67,7 +67,7 @@ namespace vitmod
 		public override void Added(Scene scene)
 		{
 			base.Added(scene);
-			Image image = new Image(GFX.Game[!redirectSpeed ? "objects/energyBooster/outline" : "objects/energyBoosterRedirect/outline"]);
+			Image image = new Image(GFX.Game[!redirectSpeed ? "objects/CrystallineHelper/FLCC/energyBooster/outline" : "objects/CrystallineHelper/FLCC/energyBoosterRedirect/outline"]);
 			image.CenterOrigin();
 			image.Color = Color.White * 0.75f;
 			outline = new Entity(Position);

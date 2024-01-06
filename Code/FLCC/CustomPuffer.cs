@@ -76,6 +76,8 @@ namespace vitmod
 		private bool canUpdateHome = false;
 		private bool holdFlip = false;
         private bool legacyBoost = true;
+        private bool absoluteVector = false;
+        private bool launchState = true;
 
 		public CustomPuffer(Vector2 position, bool faceRight, float angle = 0f, float radius = 32f, float launchSpeed = 280f, string spriteName = "pufferFish")
 			: base(position)
@@ -85,7 +87,7 @@ namespace vitmod
 			Add(new PlayerCollider(OnPlayer, new Hitbox(14f, 12f, -7f, -7f)));
 			Add(sprite = GFX.SpriteBank.Create(spriteName));
 			sprite.Play("idle");
-			Add(happySprite = GFX.SpriteBank.Create("flccSmileyPuffer"));
+			Add(happySprite = GFX.SpriteBank.Create("crystalline_flccSmileyPuffer"));
 			happySprite.Play("idle");
 			happySprite.Visible = false;
 			if (!faceRight)
@@ -132,6 +134,8 @@ namespace vitmod
 			holdFlip = data.Bool("holdFlip");
 			boostMode = data.Enum("boostMode", BoostModes.SetSpeed);
             legacyBoost = data.Bool("legacyBoost", true);
+            absoluteVector = data.Bool("absoluteVector", false);
+            launchState = data.Bool("setLaunchState", true);
 
 			if (data.Bool("holdable"))
 			{
@@ -776,18 +780,21 @@ namespace vitmod
 			float num = Vector2.Dot(vector, sideVector);
 
 			sideVector *= Math.Sign(num);
-			float oldSpeedX = Math.Abs(player.Speed.X);
+			float oldSpeed = Math.Abs(player.Speed.X);
+            if (absoluteVector) {
+                oldSpeed = player.Speed.Length();
+            }
 
 			if (boostMode == BoostModes.RedirectSpeed)
             {
-				player.Speed = oldSpeedX * sideVector;
+				player.Speed = oldSpeed * sideVector;
             }
             else
             {
 				player.Speed = launchSpeed * sideVector;
 				if (boostMode == BoostModes.AddRedirectSpeed)
 				{
-					player.Speed += oldSpeedX * sideVector;
+					player.Speed += oldSpeed * sideVector;
 				}
 			}
 			if (player.Speed.Y <= 50f)
@@ -810,9 +817,9 @@ namespace vitmod
 				player.RefillDash();
 			}
 			player.RefillStamina();
-			//player.dashCooldownTimer = 0.2f;
-			player.StateMachine.State = 7;
-			return vector;
+            //player.dashCooldownTimer = 0.2f;
+            player.StateMachine.State = Player.StLaunch;
+            return vector;
 		}
 
 		private static float WrapAngle(float angle)

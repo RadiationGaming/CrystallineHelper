@@ -22,6 +22,7 @@ customPuffer.placements = {
             holdFlip = false,
             boostMode = "SetSpeed",
             legacyBoost = false,
+            absoluteVector = false,
         }
     },
     {
@@ -44,6 +45,7 @@ customPuffer.placements = {
             holdFlip = false,
             boostMode = "SetSpeed",
             legacyBoost = false,
+            absoluteVector = false,
         }
     }
 }
