@@ -28,6 +28,7 @@ namespace vitmod
             }
             visibleDist = data.Float("visibleDistance");
             canClip = data.Bool("allowClipping");
+            silent = data.Bool("silent");
 
             nodes = data.NodesOffset(offset);
             lastSigns = new int[nodes.Length];
@@ -51,7 +52,8 @@ namespace vitmod
             Add(startsprite);
             ends.Add(startsprite);
 
-            Add(sound = new SoundSource("event:/new_content/env/10_electricity"));
+            if (!silent)
+                Add(sound = new SoundSource("event:/new_content/env/10_electricity"));
 
             for (int i = 0; i < nodes.Length; i++)
             {
@@ -120,7 +122,9 @@ namespace vitmod
 
             if (Collidable)
             {
-                if (!sound.Playing) sound.Play("event:/new_content/env/10_electricity");
+                if (!sound.Playing && !silent)
+                    sound.Play("event:/new_content/env/10_electricity");
+
                 for (int i = 0; i < nodes.Length; i++)
                 {
                     Vector2 node = nodes[i];
@@ -159,7 +163,8 @@ namespace vitmod
             else
             {
                 alpha = 0f;
-                if (sound.Playing) sound.Stop();
+                if (sound.Playing && !silent)
+                    sound.Stop();
             }
         }
 
@@ -208,6 +213,7 @@ namespace vitmod
         private string flag;
         private bool invert;
         private Vector2[] nodes;
+        private bool silent;
 
         private float visibleDist;
         private bool canClip;
