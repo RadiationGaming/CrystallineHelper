@@ -36,8 +36,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Reference Include="$(CelestePrefix)\Celeste.exe" Publicize="true" />
         <Reference Include="$(CelestePrefix)\MMHOOK_Celeste.dll" />
+        <Reference Include="$(CelestePrefix)\Celeste.exe" Publicize="true" />
         <Reference Include="lib-stripped\FrostTempleHelper.dll" />
         <Reference Include="lib-stripped\VivHelper.dll" />
     </ItemGroup>
