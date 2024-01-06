@@ -12,6 +12,6 @@ cassetteFlags.placements = {
         }
     }
 }
-cassetteFlags.texture = "ahorn_cassetteflagcontroller"
+cassetteFlags.texture = "CrystallineHelper/FLCC/ahorn_cassetteflagcontroller"
 
 return cassetteFlags

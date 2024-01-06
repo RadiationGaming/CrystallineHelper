@@ -24,7 +24,7 @@ energyBooster.placements = {
 }
 
 function energyBooster.sprite(room, entity)
-    return drawableSprite.fromTexture(entity.redirectSpeed and "objects/energyBoosterRedirect/booster00" or "objects/energyBooster/booster00", entity)
+    return drawableSprite.fromTexture(entity.redirectSpeed and "objects/CrystallineHelper/FLCC/energyBoosterRedirect/booster00" or "objects/CrystallineHelper/FLCC/energyBooster/booster00", entity)
 end
 
 function energyBooster.selection(room, entity)

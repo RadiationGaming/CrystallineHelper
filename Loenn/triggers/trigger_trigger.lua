@@ -19,6 +19,7 @@ local activationTypes = {
     ["Touched Solid"] = "OnSolid",
     ["Entity Entered"] = "OnEntityEnter",
     ["On Input"] = "OnInput",
+    ["Grounded"] = "OnGrounded",
 }
 
 local comparisonTypes = {
@@ -84,6 +85,7 @@ function triggerTrigger.ignoredFields(entity)
         "solidType",
         "entityType",
         "inputType",
+        "onlyIfSafe",
     }
 
     local function doNotIgnore(value)
@@ -127,6 +129,8 @@ function triggerTrigger.ignoredFields(entity)
         doNotIgnore("entityType")
     elseif atype == "OnInput" then
         doNotIgnore("inputType")
+    elseif atype == "OnGrounded" then
+        doNotIgnore("onlyIfSafe")
     end
 
     if iscomparison then
@@ -165,6 +169,7 @@ for _, mode in pairs(activationTypes) do
             solidType = "",
             entityType = "",
             inputType = "Grab",
+            onlyIfSafe = false,
         }
     }
     table.insert(triggerTrigger.placements, placement)

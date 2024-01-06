@@ -16,6 +16,7 @@ forcefield.placements = {
             flag = "",
             visibleDistance = 0,
             allowClipping = true,
+            silent = false,
         }
     },
     {
@@ -26,6 +27,7 @@ forcefield.placements = {
             flag = "",
             visibleDistance = 0,
             allowClipping = true,
+            silent = false,
         }
     },
 }

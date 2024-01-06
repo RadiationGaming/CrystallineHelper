@@ -33,10 +33,10 @@ for _, axis in pairs(axesOptions) do
 end
 
 local frameTextures = {
-    none = "objects/bumperBlock/block00",
-    horizontal = "objects/bumperBlock/block01",
-    vertical = "objects/bumperBlock/block02",
-    both = "objects/bumperBlock/block03"
+    none = "objects/CrystallineHelper/FLCC/bumperBlock/block00",
+    horizontal = "objects/CrystallineHelper/FLCC/bumperBlock/block01",
+    vertical = "objects/CrystallineHelper/FLCC/bumperBlock/block02",
+    both = "objects/CrystallineHelper/FLCC/bumperBlock/block03"
 }
 
 local ninePatchOptions = {
@@ -45,7 +45,7 @@ local ninePatchOptions = {
 }
 
 local kevinColor = {98 / 255, 34 / 255, 43 / 255}
-local faceTexture = "objects/bumperBlock/idle_face"
+local faceTexture = "objects/CrystallineHelper/FLCC/bumperBlock/idle_face"
 
 function bumperBlock.sprite(room, entity)
     local x, y = entity.x or 0, entity.y or 0

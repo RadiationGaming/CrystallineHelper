@@ -23,20 +23,20 @@ function smwCheckpoint.sprite(room, entity)
     
     for i=0, math.floor(entity.height / 8) - 1 do
         local quad_x, quad_y = 0, (i == 0) and 0 or 8
-        local sprite = drawableSprite.fromTexture("objects/smwCheckpoint/bars", entity)
+        local sprite = drawableSprite.fromTexture("objects/CrystallineHelper/FLCC/smwCheckpoint/bars", entity)
         sprite.y += i*8
         sprite:useRelativeQuad(quad_x, quad_y, 4, 8)
         table.insert(sprites, sprite)
     end
 
-    local cp = drawableSprite.fromTexture("objects/smwCheckpoint/cp", entity)
+    local cp = drawableSprite.fromTexture("objects/CrystallineHelper/FLCC/smwCheckpoint/cp", entity)
     cp:setPosition(entity.x + 2, entity.nodes[1].y)
     cp:setJustification(0, 0.5)
     table.insert(sprites, cp)
 
     for i=0, math.floor(entity.height / 8) - 1 do
         local quad_x, quad_y = 4, (i == 0) and 0 or 8
-        local sprite = drawableSprite.fromTexture("objects/smwCheckpoint/bars", entity)
+        local sprite = drawableSprite.fromTexture("objects/CrystallineHelper/FLCC/smwCheckpoint/bars", entity)
         sprite:addPosition(12, i*8)
         sprite:useRelativeQuad(quad_x, quad_y, 4, 8)
         table.insert(sprites, sprite)

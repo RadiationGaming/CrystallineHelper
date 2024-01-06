@@ -17,8 +17,8 @@ const placements = Ahorn.PlacementDict(
     ),
 )
 
-sprite = "objects/energyBooster/booster00"
-altSprite = "objects/energyBoosterRedirect/booster00"
+sprite = "objects/CrystallineHelper/FLCC/energyBooster/booster00"
+altSprite = "objects/CrystallineHelper/FLCC/energyBoosterRedirect/booster00"
 
 function Ahorn.selection(entity::EnergyBooster)
     x, y = Ahorn.position(entity)

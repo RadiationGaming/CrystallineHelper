@@ -10,7 +10,7 @@ namespace vitmod
     [CustomEntity("vitellary/deadlydashswitch")]
     public class DeadlyDashSwitch : DashSwitch
     {
-        public DeadlyDashSwitch(EntityData data, Vector2 offset) : base(data.Position + offset, sideDict[data.Attr("direction", "Left")], data.Bool("persistent"), false, new EntityID(data.Level.Name, data.ID), "deadly")
+        public DeadlyDashSwitch(EntityData data, Vector2 offset) : base(data.Position + offset, sideDict[data.Attr("direction", "Left")], data.Bool("persistent"), false, new EntityID(data.Level.Name, data.ID), "crystalline_flcc_deadly")
         {
             direction = sideDict[data.Attr("direction", "Left")];
             switch (direction)

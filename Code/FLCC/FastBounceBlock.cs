@@ -17,12 +17,12 @@ namespace vitmod
             state = States.Waiting;
             startPos = Position;
             hotImages = BuildSprite(GFX.Game["objects/bumpblocknew/fire00"]);
-            hotCenterSprite = GFX.SpriteBank.Create("fastBumpBlockCenterFire");
+            hotCenterSprite = GFX.SpriteBank.Create("crystalline_flcc_fastBumpBlockCenterFire");
             hotCenterSprite.Position = new Vector2(Width, Height) / 2f;
             hotCenterSprite.Visible = false;
             Add(hotCenterSprite);
             coldImages = BuildSprite(GFX.Game["objects/bumpblocknew/ice00"]);
-            coldCenterSprite = GFX.SpriteBank.Create("fastBumpBlockCenterIce");
+            coldCenterSprite = GFX.SpriteBank.Create("crystalline_flcc_fastBumpBlockCenterIce");
             coldCenterSprite.Position = new Vector2(Width, Height) / 2f;
             coldCenterSprite.Visible = false;
             Add(coldCenterSprite);
