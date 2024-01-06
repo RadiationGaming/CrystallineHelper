@@ -18,9 +18,6 @@ bombTimer.fieldInformation = {
     },
     soundAt = {
         minimumValue = 0,
-        maximumValue = function(room, entity)
-            return entity.timer
-        end,
     },
 }
 
