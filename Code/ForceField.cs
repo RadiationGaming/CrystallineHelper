@@ -52,8 +52,10 @@ namespace vitmod
             Add(startsprite);
             ends.Add(startsprite);
 
-            if (!silent)
-                Add(sound = new SoundSource("event:/new_content/env/10_electricity"));
+            // if (!silent)
+            Add(sound = new SoundSource("event:/new_content/env/10_electricity"));
+            if (silent)
+                sound.Stop();
 
             for (int i = 0; i < nodes.Length; i++)
             {
