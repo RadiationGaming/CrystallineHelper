@@ -1,4 +1,5 @@
 ﻿using Celeste;
+using Celeste.Mod;
 using Celeste.Mod.Entities;
 using Microsoft.Xna.Framework;
 using Monocle;
@@ -33,6 +34,7 @@ namespace vitmod
 
         public override void OnEnter(Player player)
         {
+            base.OnEnter(player);
             if (!alreadyIn)
             {
                 VitModule.noMoveScaleTimer = 0f;
@@ -44,8 +46,14 @@ namespace vitmod
 
         public override void OnLeave(Player player)
         {
-            if (player.Scene != null && !player.CollideCheck<NoMoveTrigger>())
+            base.OnLeave(player);
+            if (player.Scene != null)
             {
+                foreach (NoMoveTrigger trigger in player.Scene.Tracker.GetEntities<NoMoveTrigger>()) {
+                    if (trigger != this && trigger.PlayerIsInside) {
+                        return;
+                    }
+                }
                 alreadyIn = false;
             }
         }
