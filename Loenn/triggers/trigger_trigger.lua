@@ -38,6 +38,7 @@ local inputTypes = {
     "Grab",
     "Interact",
     "CrouchDash",
+    "Any",
 }
 
 local triggerTrigger = {}
@@ -85,6 +86,7 @@ function triggerTrigger.ignoredFields(entity)
         "solidType",
         "entityType",
         "inputType",
+        "holdInput",
         "onlyIfSafe",
     }
 
@@ -129,6 +131,7 @@ function triggerTrigger.ignoredFields(entity)
         doNotIgnore("entityType")
     elseif atype == "OnInput" then
         doNotIgnore("inputType")
+        doNotIgnore("holdInput")
     elseif atype == "OnGrounded" then
         doNotIgnore("onlyIfSafe")
     end
@@ -169,6 +172,7 @@ for _, mode in pairs(activationTypes) do
             solidType = "",
             entityType = "",
             inputType = "Grab",
+            holdInput = false,
             onlyIfSafe = false,
         }
     }
