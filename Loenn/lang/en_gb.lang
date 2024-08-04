@@ -98,6 +98,7 @@ triggers.vitellary/triggertrigger.placements.name.onsolid=Trigger Trigger (Touch
 triggers.vitellary/triggertrigger.placements.name.onentityenter=Trigger Trigger (Entity Entered)
 triggers.vitellary/triggertrigger.placements.name.oninput=Trigger Trigger (On Input)
 triggers.vitellary/triggertrigger.placements.name.ongrounded=Trigger Trigger (Grounded)
+triggers.vitellary/triggertrigger.placements.name.onplayerstate=Trigger Trigger (Player State)
 triggers.vitellary/bombtimer.placements.name.bomb_timer=Bomb Timer Trigger
 triggers.vitellary/dropholdables.placements.name.drop_holdables=Drop Holdable Trigger
 triggers.vitellary/roomnametrigger.placements.name.room_name_trigger=Room Name Trigger
@@ -366,6 +367,7 @@ triggers.vitellary/triggertrigger.attributes.description.coreMode=Core mode the 
 triggers.vitellary/triggertrigger.attributes.description.entityType=Class name of the type of entity to check.
 triggers.vitellary/triggertrigger.attributes.description.solidType=Class name of the type of solid to check. If left blank, the trigger will allow any solids to be considered.
 triggers.vitellary/triggertrigger.attributes.description.inputType=The type of input the player needs to press.
+triggers.vitellary/triggertrigger.attributes.description.holdInput=Whether the trigger will be active for the entire time the input is held, or just for the frame it's pressed.
 triggers.vitellary/triggertrigger.attributes.description.onlyIfSafe=Whether the floor the player is standing on needs to be safe ground (aka. ground that a berry could be collected on).
 
 # Edit Depth Trigger

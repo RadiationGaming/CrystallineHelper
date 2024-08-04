@@ -18,12 +18,14 @@ namespace vitmod
         {
             On.Celeste.CoreModeToggle.OnPlayer += CoreModeToggle_OnPlayer;
             On.Celeste.Player.WallBoosterCheck += Player_WallBoosterCheck;
+            On.Celeste.LightningRenderer.Update += LightningRenderer_Update;
         }
 
         public static void Unload()
         {
             On.Celeste.CoreModeToggle.OnPlayer -= CoreModeToggle_OnPlayer;
             On.Celeste.Player.WallBoosterCheck -= Player_WallBoosterCheck;
+            On.Celeste.LightningRenderer.Update -= LightningRenderer_Update;
         }
 
         public TimeCrystal(EntityData data, Vector2 offset) : base(data.Position + offset)
@@ -210,6 +212,16 @@ namespace vitmod
             else
             {
                 return null;
+            }
+        }
+
+        private static void LightningRenderer_Update(On.Celeste.LightningRenderer.orig_Update orig, LightningRenderer self) {
+            if (stopStage == 1 && !entitiesToIgnore.Contains("Celeste.LightningRenderer")) {
+                self.ToggleEdges(true); // updates edges not rendering when "offcamera"
+                self.Get<CustomBloom>().Update(); // updates rectangle center not rendering when "offcamera"
+                // Lightning Render is updated by default exempting Lightning from the update rules
+            } else {
+                orig(self);
             }
         }
 

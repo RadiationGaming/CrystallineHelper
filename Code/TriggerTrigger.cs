@@ -1,10 +1,12 @@
 ﻿using Celeste;
 using Celeste.Mod.Entities;
+using FMOD;
 using Microsoft.Xna.Framework;
 using Monocle;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace vitmod {
     [CustomEntity("vitellary/triggertrigger")]
@@ -47,7 +49,26 @@ namespace vitmod {
             waitTime = data.Float("timeToWait", 0f);
             coreMode = data.Enum("coreMode", Session.CoreModes.None);
             inputType = data.Enum("inputType", InputTypes.Grab);
+            if (data.Has("holdInput")) {
+                inputHeld = data.Bool("holdInput");
+            } else {
+                // account for previous behavior:
+                // if it's a direction, use whether the direction is held
+                // otherwise, just check if it's pressed
+                switch (inputType) {
+                    case InputTypes.Left:
+                    case InputTypes.Right:
+                    case InputTypes.Up:
+                    case InputTypes.Down:
+                        inputHeld = true;
+                        break;
+                    default:
+                        inputHeld = false;
+                        break;
+                }
+            }
             ifSafe = data.Bool("onlyIfSafe", false);
+            playerState = data.Int("playerState", 0);
             if (string.IsNullOrEmpty(data.Attr("entityType", ""))) {
                 collideType = data.Attr("entityTypeToCollide", "Celeste.Strawberry");
             } else {
@@ -284,40 +305,24 @@ namespace vitmod {
                     }
                     break;
                 case ActivationTypes.OnInput:
-                    switch (inputType) {
-                        case InputTypes.Grab:
-                            result = Input.Grab.Pressed;
-                            break;
-                        case InputTypes.Jump:
-                            result = Input.Jump.Pressed;
-                            break;
-                        case InputTypes.Dash:
-                            result = Input.Dash.Pressed;
-                            break;
-                        case InputTypes.Interact:
-                            result = Input.Talk.Pressed;
-                            break;
-                        case InputTypes.CrouchDash:
-                            result = Input.CrouchDash.Pressed;
-                            break;
-                        default:
-                            Vector2 aim = Input.Aim.Value.FourWayNormal();
-                            if (inputType == InputTypes.Left && aim.X < 0f)
+                    if (inputType != InputTypes.Any) {
+                        result = CheckInput(inputType, inputHeld);
+                    } else {
+                        foreach (InputTypes input in Enum.GetValues<InputTypes>()) {
+                            if (CheckInput(input, inputHeld)) {
                                 result = true;
-                            else if (inputType == InputTypes.Right && aim.X > 0f)
-                                result = true;
-                            else if (inputType == InputTypes.Down &&  aim.Y > 0f)
-                                result = true;
-                            else if (inputType == InputTypes.Up  && aim.Y < 0f)
-                                result = true;
-
-                            break;
+                                break;
+                            }
+                        }
                     }
                     break;
                 case ActivationTypes.OnGrounded:
                     result = player.OnGround();
                     if (ifSafe)
                         result &= player.OnSafeGround;
+                    break;
+                case ActivationTypes.OnPlayerState:
+                    result = player.StateMachine.State == playerState;
                     break;
                 default:
                     result = false;
@@ -448,6 +453,35 @@ namespace vitmod {
             yield break;
         }
 
+        private bool CheckInput(InputTypes inputType, bool held) {
+            switch (inputType) {
+                case InputTypes.Grab:
+                    return (held ? Input.Grab.Check : Input.Grab.Pressed);
+                case InputTypes.Jump:
+                    return (held ? Input.Jump.Check : Input.Jump.Pressed);
+                case InputTypes.Dash:
+                    return (held ? Input.Dash.Check : Input.Dash.Pressed);
+                case InputTypes.Interact:
+                    return (held ? Input.Talk.Check : Input.Talk.Pressed);
+                case InputTypes.CrouchDash:
+                    return (held ? Input.CrouchDash.Check : Input.CrouchDash.Pressed);
+                default:
+                    Vector2 aim = Input.Aim.Value.FourWayNormal();
+                    if (held || (aim != Input.Aim.PreviousValue.FourWayNormal())) {
+                        if (inputType == InputTypes.Left && aim.X < 0f)
+                            return true;
+                        else if (inputType == InputTypes.Right && aim.X > 0f)
+                            return true;
+                        else if (inputType == InputTypes.Down && aim.Y > 0f)
+                            return true;
+                        else if (inputType == InputTypes.Up && aim.Y < 0f)
+                            return true;
+                    }
+                    break;
+            }
+            return false;
+        }
+
         private static void Player_Jump(On.Celeste.Player.orig_Jump orig, Player self, bool particles, bool playSfx) {
             orig(self, particles, playSfx);
             if (self == null) { return; }
@@ -513,7 +547,9 @@ namespace vitmod {
         private int collideCount;
         private Session.CoreModes coreMode;
         private InputTypes inputType;
+        private bool inputHeld;
         private bool ifSafe;
+        private int playerState;
         private TalkComponent talker;
         private List<Entity> entitiesInside;
         private string collideSolid;
@@ -551,6 +587,7 @@ namespace vitmod {
             OnEntityEnter,
             OnInput,
             OnGrounded,
+            OnPlayerState,
         };
         public enum RandomizationTypes {
             FileTimer,
@@ -566,6 +603,7 @@ namespace vitmod {
             Grab,
             Interact,
             CrouchDash,
+            Any,
         };
         private static List<ActivationTypes> bypassGlobal = new List<ActivationTypes>() {
             ActivationTypes.OnHoldableEnter,

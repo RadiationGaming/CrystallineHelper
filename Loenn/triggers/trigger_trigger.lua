@@ -20,6 +20,7 @@ local activationTypes = {
     ["Entity Entered"] = "OnEntityEnter",
     ["On Input"] = "OnInput",
     ["Grounded"] = "OnGrounded",
+    ["Player State"] = "OnPlayerState",
 }
 
 local comparisonTypes = {
@@ -38,6 +39,7 @@ local inputTypes = {
     "Grab",
     "Interact",
     "CrouchDash",
+    "Any",
 }
 
 local triggerTrigger = {}
@@ -64,6 +66,9 @@ triggerTrigger.fieldInformation = {
         editable = false,
         options = enums.core_modes
     },
+    playerState = {
+        fieldType = "integer",
+    }
 }
 
 function triggerTrigger.ignoredFields(entity)
@@ -85,7 +90,9 @@ function triggerTrigger.ignoredFields(entity)
         "solidType",
         "entityType",
         "inputType",
+        "holdInput",
         "onlyIfSafe",
+        "playerState",
     }
 
     local function doNotIgnore(value)
@@ -129,8 +136,11 @@ function triggerTrigger.ignoredFields(entity)
         doNotIgnore("entityType")
     elseif atype == "OnInput" then
         doNotIgnore("inputType")
+        doNotIgnore("holdInput")
     elseif atype == "OnGrounded" then
         doNotIgnore("onlyIfSafe")
+    elseif atype == "OnPlayerState" then
+        doNotIgnore("playerState")
     end
 
     if iscomparison then
@@ -169,7 +179,9 @@ for _, mode in pairs(activationTypes) do
             solidType = "",
             entityType = "",
             inputType = "Grab",
+            holdInput = false,
             onlyIfSafe = false,
+            playerState = 0,
         }
     }
     table.insert(triggerTrigger.placements, placement)

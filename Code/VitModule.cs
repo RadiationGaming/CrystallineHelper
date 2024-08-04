@@ -461,7 +461,7 @@ namespace vitmod
             {
                 useNoMoveDelta = false;
             }
-
+            self.Session.SetFlag(TimeFrozenFlag, TimeCrystal.stopStage == 1);
 			orig(self);
         }
 
@@ -832,6 +832,8 @@ namespace vitmod
             On.Celeste.Level.LoadLevel -= Level_LoadLevel;
             On.Celeste.Level.Reload -= Level_Reload;
         }
+
+        public const string TimeFrozenFlag = "CrystallineHelper_TimeIsFrozen";
 
         private float rainbowTimer;
 
