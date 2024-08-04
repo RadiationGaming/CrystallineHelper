@@ -98,6 +98,7 @@ triggers.vitellary/triggertrigger.placements.name.onsolid=Trigger Trigger (Touch
 triggers.vitellary/triggertrigger.placements.name.onentityenter=Trigger Trigger (Entity Entered)
 triggers.vitellary/triggertrigger.placements.name.oninput=Trigger Trigger (On Input)
 triggers.vitellary/triggertrigger.placements.name.ongrounded=Trigger Trigger (Grounded)
+triggers.vitellary/triggertrigger.placements.name.onplayerstate=Trigger Trigger (Player State)
 triggers.vitellary/bombtimer.placements.name.bomb_timer=Bomb Timer Trigger
 triggers.vitellary/dropholdables.placements.name.drop_holdables=Drop Holdable Trigger
 triggers.vitellary/roomnametrigger.placements.name.room_name_trigger=Room Name Trigger

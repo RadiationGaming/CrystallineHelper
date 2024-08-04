@@ -68,6 +68,7 @@ namespace vitmod {
                 }
             }
             ifSafe = data.Bool("onlyIfSafe", false);
+            playerState = data.Int("playerState", 0);
             if (string.IsNullOrEmpty(data.Attr("entityType", ""))) {
                 collideType = data.Attr("entityTypeToCollide", "Celeste.Strawberry");
             } else {
@@ -320,6 +321,9 @@ namespace vitmod {
                     if (ifSafe)
                         result &= player.OnSafeGround;
                     break;
+                case ActivationTypes.OnPlayerState:
+                    result = player.StateMachine.State == playerState;
+                    break;
                 default:
                     result = false;
                     break;
@@ -545,6 +549,7 @@ namespace vitmod {
         private InputTypes inputType;
         private bool inputHeld;
         private bool ifSafe;
+        private int playerState;
         private TalkComponent talker;
         private List<Entity> entitiesInside;
         private string collideSolid;
@@ -582,6 +587,7 @@ namespace vitmod {
             OnEntityEnter,
             OnInput,
             OnGrounded,
+            OnPlayerState,
         };
         public enum RandomizationTypes {
             FileTimer,
