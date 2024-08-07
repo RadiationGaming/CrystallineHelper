@@ -217,6 +217,8 @@ namespace vitmod
 
         private static void LightningRenderer_Update(On.Celeste.LightningRenderer.orig_Update orig, LightningRenderer self) {
             if (stopStage == 1 && !entitiesToIgnore.Contains("Celeste.LightningRenderer")) {
+                if (self.dirty)
+                    self.RebuildEdges();
                 self.ToggleEdges(true); // updates edges not rendering when "offcamera"
                 self.Get<CustomBloom>().Update(); // updates rectangle center not rendering when "offcamera"
                 // Lightning Render is updated by default exempting Lightning from the update rules
