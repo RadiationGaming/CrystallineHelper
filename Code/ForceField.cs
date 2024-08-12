@@ -31,6 +31,7 @@ namespace vitmod
             silent = data.Bool("silent");
 
             nodes = data.NodesOffset(offset);
+            rngOffset = Calc.Random.NextFloat();
             lastSigns = new int[nodes.Length];
             ends = new List<Sprite>();
             lasers = new List<List<Sprite>>();
@@ -57,9 +58,24 @@ namespace vitmod
             if (silent)
                 sound.Stop();
 
+            bounds = new Rectangle((int)X, (int)Y, 0, 0);
             for (int i = 0; i < nodes.Length; i++)
             {
-                Vector2 node = nodes[i] - Position;
+                Vector2 nodePos = nodes[i];
+                if (nodePos.X < bounds.X) {
+                    bounds.Width += (int)(bounds.X - nodePos.X);
+                    bounds.X = (int)nodePos.X;
+                } else {
+                    bounds.Width = (int)Math.Max(bounds.Width, nodePos.X - bounds.X);
+                }
+                if (nodePos.Y < bounds.Y) {
+                    bounds.Height += (int)(bounds.Y - nodePos.Y);
+                    bounds.Y = (int)nodePos.Y;
+                } else {
+                    bounds.Height = (int)Math.Max(bounds.Height, nodePos.Y - bounds.Y);
+                }
+
+                Vector2 node = nodePos - Position;
                 Sprite nodesprite = new Sprite(GFX.Game, "objects/" + texture + "/end");
                 nodesprite.AddLoop("idle", "", 0.1f);
                 nodesprite.Play("idle");
@@ -102,19 +118,28 @@ namespace vitmod
             Player player = Scene.Tracker.GetEntity<Player>();
             if (player == null) return;
 
-            // set alphas for each node
-            if (visibleDist > 0)
-            {
-                float dist = visibleDist * 2f;
-                for (int i = 0; i <= nodes.Length; i++)
-                {
-                    Vector2 node = Position;
-                    if (i > 0) node = nodes[i - 1];
-                    dist = Math.Min(Vector2.Distance(player.Position, node), dist);
-                }
-                alpha = Calc.ClampedMap(dist, visibleDist, visibleDist * 2f, 1f, 0f);
+            if (Scene.OnInterval(0.25f, rngOffset) && !InView()) {
+                inView = false;
+            } else if (!inView && InView()) {
+                inView = true;
             }
-            else alpha = 1f;
+
+            // set alphas for each node
+            if (inView) {
+                if (visibleDist > 0) {
+                    float dist = visibleDist * 2f;
+                    for (int i = 0; i <= nodes.Length; i++) {
+                        Vector2 node = Position;
+                        if (i > 0)
+                            node = nodes[i - 1];
+                        dist = Math.Min(Vector2.Distance(player.Position, node), dist);
+                    }
+                    alpha = Calc.ClampedMap(dist, visibleDist, visibleDist * 2f, 1f, 0f);
+                } else
+                    alpha = 1f;
+            } else {
+                alpha = 0f;
+            }
 
             if (flag != "")
             {
@@ -170,6 +195,12 @@ namespace vitmod
             }
         }
 
+        private bool InView() {
+            Camera camera = (Scene as Level).Camera;
+            return ((bounds.Right > camera.Left - 16f) || (bounds.Left < camera.Right + 16f))
+                && ((bounds.Bottom > camera.Top - 16f) || (bounds.Top < camera.Bottom + 16f));
+        }
+
         public void OnPlayer(Player player)
         {
             player.Die(Vector2.Zero);
@@ -177,6 +208,9 @@ namespace vitmod
 
         public override void Render()
         {
+            if (alpha == 0f)
+                return;
+
             foreach (Sprite nodesprite in ends)
             {
                 nodesprite.Color = tint * alpha;
@@ -208,6 +242,7 @@ namespace vitmod
                 }
                 Draw.Line(start, node, color);
             }
+            // Draw.HollowRect(bounds, Color.Cyan);
         }
 
         private string texture;
@@ -215,6 +250,9 @@ namespace vitmod
         private string flag;
         private bool invert;
         private Vector2[] nodes;
+        private Rectangle bounds;
+        private float rngOffset;
+        private bool inView;
         private bool silent;
 
         private float visibleDist;
