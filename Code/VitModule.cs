@@ -648,6 +648,9 @@ namespace vitmod
             // coyote bounce trigger;
             if (CoyoteBounceTrigger.GroundedOverride > 0f) {
                 CoyoteBounceTrigger.GroundedOverride -= Engine.DeltaTime;
+                if (self.jumpGraceTimer <= 0f) {
+                    CoyoteBounceTrigger.GroundedOverride = 0f;
+                }
             }
         }
 
