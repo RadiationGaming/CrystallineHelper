@@ -8,11 +8,15 @@ coyoteBounceTrigger.fieldInformation = {
     },
     directions = {
         options = {"None", "Top", "TopAndSides", "AllDirections"},
-        editable = false
+        editable = false,
+    },
+    dashTypes = {
+        options = {"All", "Rebound", "Bounce", "Normal", "Ignore"},
+        editable = false,
     },
     refillDirections = {
         options = {"MatchCoyote", "None", "Top", "TopAndSides", "AllDirections"},
-        editable = false
+        editable = false,
     },
 }
 
@@ -23,6 +27,7 @@ coyoteBounceTrigger.placements = {
             directions = "Top",
             time = 0.1,
             refillDirections = "MatchCoyote",
+            dashTypes = "Rebound",
             setGrounded = false,
         }
     }

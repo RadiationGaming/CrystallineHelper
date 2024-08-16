@@ -65,6 +65,9 @@ namespace vitmod {
             if (bouncer == null)
                 return;
 
+            if (!CoyoteBounceTrigger.MatchDashType(result, bouncer.types))
+                return;
+
             if (CoyoteBounceTrigger.MatchDirection(direction, bouncer.directions)) {
                 player.jumpGraceTimer = bouncer.time;
                 if (bouncer.setGrounded) {
@@ -86,6 +89,7 @@ namespace vitmod {
 		}
 
 		public BounceDirections directions;
+        public DashTypes types;
 		public float time;
         public BounceDirections refill;
         public bool setGrounded;
@@ -95,6 +99,7 @@ namespace vitmod {
 
         public CoyoteBounceTrigger(EntityData data, Vector2 offset) : base(data, offset) {
             directions = data.Enum("directions", BounceDirections.Top);
+            types = data.Enum("dashTypes", DashTypes.All);
             time = data.Float("time", 0.1f);
             if (data.Has("refill") || data.Attr("refillDirections", "Top") == "MatchCoyote") {
                 refill = directions;
@@ -119,24 +124,44 @@ namespace vitmod {
         public override void Removed(Scene scene)
         {
             base.Removed(scene);
-			if (CoyoteTriggerInside == this)
-			{
+			if (CoyoteTriggerInside == this) {
 				CoyoteTriggerInside = null;
 			}
 		}
 
-        public enum BounceDirections
-        {
+        public enum BounceDirections {
             None,
             Top,
             TopAndSides,
             AllDirections
         }
+
+        public enum DashTypes {
+            All,
+            Rebound,
+            Bounce,
+            Ignore,
+            Normal,
+        }
+
         public static bool MatchDirection(Vector2 direction, BounceDirections bounceDirections) {
             if (bounceDirections == BounceDirections.None)
                 return false;
 
             return !((direction.Y < 0f && bounceDirections != BounceDirections.AllDirections) || (direction.X != 0f && bounceDirections == BounceDirections.Top));
+        }
+
+        public static bool MatchDashType(DashCollisionResults result, DashTypes dashTypes) {
+            if (dashTypes == DashTypes.All)
+                return true;
+
+            if (result.ToString() == dashTypes.ToString())
+                return true;
+
+            if (dashTypes == DashTypes.Normal && (result == DashCollisionResults.NormalCollision || result == DashCollisionResults.NormalOverride))
+                return true;
+
+            return false;
         }
     }
 }

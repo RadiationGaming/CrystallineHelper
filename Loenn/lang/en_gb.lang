@@ -400,6 +400,9 @@ triggers.vitellary/roomnametrigger.attributes.description.roomName=The text to a
 # Coyote Bounce Trigger
 triggers.vitellary/coyotebounce.attributes.description.time=The amount of time the player should gain coyote frames for.\nThe vanilla amount is 0.1, or about 5 frames.
 triggers.vitellary/coyotebounce.attributes.description.refill=Whether the player should also refill dashes and stamina when bouncing.
+triggers.vitellary/coyotebounce.attributes.description.directions=The sides of the solid that should give you coyote frames upon collision.\n"Top" is useful for making existing vanilla behavior more consistent.\nOther sides are not based on vanilla mechanics, and are instead here because I thought it was fun.
+triggers.vitellary/coyotebounce.attributes.description.refillDirections=The directions that you can regain dashes and stamina from upon collision.\n"Match Coyote" means it will match the behavior of the "Directions" field.
+triggers.vitellary/coyotebounce.attributes.description.dashTypes=What type of collision should grant the coyote frames.\nPreviously, this defaulted to "All", which was unintended behavior.
 triggers.vitellary/coyotebounce.attributes.description.setGrounded=Whether the player should be considered grounded during the coyote frame period.\nThis is NOT the vanilla behavior, and may be jank.
 
 # Flag Inside Trigger
