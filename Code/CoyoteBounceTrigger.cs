@@ -25,7 +25,7 @@ namespace vitmod {
 
         private static bool Actor_OnGround_int(On.Celeste.Actor.orig_OnGround_int orig, Actor self, int downCheck) {
             var result = orig(self, downCheck);
-            if (self is Player && CoyoteBounceTrigger.GroundedOverride > 0f) {
+            if (self is Player && CoyoteBounceTrigger.GroundedOverride) {
                 result = true;
             }
             return result;
@@ -71,7 +71,7 @@ namespace vitmod {
             if (CoyoteBounceTrigger.MatchDirection(direction, bouncer.directions)) {
                 player.jumpGraceTimer = bouncer.time;
                 if (bouncer.setGrounded) {
-                    CoyoteBounceTrigger.GroundedOverride = bouncer.time;
+                    CoyoteBounceTrigger.GroundedOverride = true;
                 }
             }
 
@@ -95,7 +95,7 @@ namespace vitmod {
         public bool setGrounded;
 
         public static CoyoteBounceTrigger CoyoteTriggerInside;
-        public static float GroundedOverride;
+        public static bool GroundedOverride;
 
         public CoyoteBounceTrigger(EntityData data, Vector2 offset) : base(data, offset) {
             directions = data.Enum("directions", BounceDirections.Top);
