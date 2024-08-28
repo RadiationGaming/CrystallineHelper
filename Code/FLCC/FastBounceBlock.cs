@@ -75,6 +75,7 @@ namespace vitmod
                     {
                         if (iceMode)
                         {
+                            player2.StartJumpGraceTime();
                             Break();
                             break;
                         }
