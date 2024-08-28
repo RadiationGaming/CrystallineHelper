@@ -9,12 +9,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Celeste.Mod;
 
 namespace vitmod
 {
     [CustomEntity("vitellary/keyberry", "vitellary/returnkeyberry")]
-    [TrackedAs(typeof(Strawberry))]
-    public class KeyBerry : Entity
+    // [TrackedAs(typeof(Strawberry))]
+    [RegisterStrawberry(false, false)]
+    public class KeyBerry : Entity, IStrawberry
     {
         public KeyBerry(EntityData data, Vector2 offset, EntityID gid) : base(data.Position + offset)
         {
@@ -112,22 +114,23 @@ namespace vitmod
                         wobble += Engine.DeltaTime * 4f;
                         sprite.Y = (bloom.Y = (light.Y = (float)Math.Sin(wobble) * 2f));
                     }
-                    int followIndex = Follower.FollowIndex;
-                    bool islastberry = false;
-                    for (int i = followIndex - 1; i >= 0; i--)
-                    {
-                        Entity entity = Follower.Leader.Followers[i].Entity;
-                        if (entity is KeyBerry)
-                        {
-                            islastberry = true;
-                            break;
-                        }
-                        if (Celeste.Mod.StrawberryRegistry.IsFirstStrawberry(entity))
-                        {
-                            break;
-                        }
-                    }
-                    if (Follower.Leader != null && Follower.DelayTimer <= 0f && !islastberry)
+                    // int followIndex = Follower.FollowIndex;
+                    // bool islastberry = false;
+                    // for (int i = followIndex - 1; i >= 0; i--)
+                    // {
+                    //     Entity entity = Follower.Leader.Followers[i].Entity;
+                    //     if (entity is KeyBerry)
+                    //     {
+                    //         islastberry = true;
+                    //         break;
+                    //     }
+                    //     if (Celeste.Mod.StrawberryRegistry.IsFirstStrawberry(entity))
+                    //     {
+                    //         break;
+                    //     }
+                    // }
+                    // if (Follower.Leader != null && Follower.DelayTimer <= 0f && !islastberry)
+                    if (Follower.Leader != null && Follower.DelayTimer <= 0f && StrawberryRegistry.IsFirstStrawberry(this))
                     {
                         Player player = Follower.Leader.Entity as Player;
                         if (player != null && player.Scene != null && !player.StrawberriesBlocked)
@@ -148,7 +151,7 @@ namespace vitmod
                     }
                     else
                     {
-                        if (followIndex > 0)
+                        if (Follower.FollowIndex > 0)
                         {
                             collectTimer = -0.15f;
                         }
@@ -313,7 +316,7 @@ namespace vitmod
             }
         }
 
-        private void OnCollect()
+        public void OnCollect()
         {
             if (!collected)
             {
