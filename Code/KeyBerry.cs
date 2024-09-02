@@ -20,6 +20,7 @@ namespace vitmod
         public KeyBerry(EntityData data, Vector2 offset, EntityID gid) : base(data.Position + offset)
         {
             wobble = 0f;
+            targetTime = data.Float("collectTime", 0.15f);
             collectTimer = 0f;
             collected = false;
             returnHomeWhenLost = true;
@@ -121,7 +122,7 @@ namespace vitmod
                             if (player.OnSafeGround)
                             {
                                 collectTimer += Engine.DeltaTime;
-                                if (collectTimer > 0.15f)
+                                if (collectTimer > targetTime)
                                 {
                                     OnCollect();
                                 }
@@ -136,7 +137,7 @@ namespace vitmod
                     {
                         if (Follower.FollowIndex > 0)
                         {
-                            collectTimer = -0.15f;
+                            collectTimer = Math.Min(targetTime - 0.3f, -0.1f);
                         }
                         if (winged)
                         {
@@ -435,6 +436,8 @@ namespace vitmod
         private bool collected;
 
         private float collectTimer;
+
+        private float targetTime;
 
         private float flapSpeed;
 

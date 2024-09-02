@@ -13,13 +13,15 @@ keyberry.placements = {
     {
         name = "normal",
         data = {
-            winged = false
+            winged = false,
+            collectTime = 0.15,
         }
     },
     {
         name = "winged",
         data = {
-            winged = true
+            winged = true,
+            collectTime = 0.15,
         }
     }
 }
