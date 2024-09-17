@@ -300,7 +300,10 @@ entities.vitellary/cassetteflags.attributes.description.yellowFlag=The flag to e
 entities.vitellary/cassetteflags.attributes.description.greenFlag=The flag to enable while the cassette cycle is green.
 
 # Room Name Controller
-entities.vitellary/roomname.attributes.description.roomName=The text to appear at the bottom of the screen.
+entities.vitellary/roomname.attributes.description.roomName=The text to appear at the bottom of the screen. Accepts dialog keys.\nTo make text disappear, leave this as blank.
+entities.vitellary/roomname.attributes.description.backgroundColor=The color of the rectangle behind the room name.
+entities.vitellary/roomname.attributes.description.textColor=The color of the room name text.
+entities.vitellary/roomname.attributes.description.disappearTimer=The amount of time until the room name goes away. Negative values means the text won't disappear.
 
 # Remote Trigger
 entities.vitellary/remotetrigger.attributes.description.value=The Linked Move Block group the trigger activates.
@@ -396,7 +399,12 @@ triggers.vitellary/bombtimer.attributes.description.changeRespawn=Whether the re
 triggers.vitellary/bombtimer.attributes.description.resetOnDeath=Whether the player returns to the start after ANY death.
 
 # Room Name Trigger
-triggers.vitellary/roomnametrigger.attributes.description.roomName=The text to appear at the bottom of the screen.
+triggers.vitellary/roomnametrigger.attributes.description.roomName=The text to appear at the bottom of the screen. Accepts dialog keys.\nTo make text disappear, leave this as blank.
+triggers.vitellary/roomnametrigger.attributes.description.backgroundColor=The color of the rectangle behind the room name.
+triggers.vitellary/roomnametrigger.attributes.description.textColor=The color of the room name text.
+triggers.vitellary/roomnametrigger.attributes.description.disappearTimer=The amount of time until the room name goes away. Negative values means the text won't disappear.
+triggers.vitellary/roomnametrigger.attributes.description.oneUse=Whether the trigger should only apply once.
+triggers.vitellary/roomnametrigger.attributes.description.instant=Whether the text and colors should instantly appear, rather than easing in.
 
 # Coyote Bounce Trigger
 triggers.vitellary/coyotebounce.attributes.description.time=The amount of time the player should gain coyote frames for.\nThe vanilla amount is 0.1, or about 5 frames.
