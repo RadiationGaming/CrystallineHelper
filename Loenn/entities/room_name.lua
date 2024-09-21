@@ -11,6 +11,9 @@ roomName.placements = {
             backgroundColor = "000000FF",
             textColor = "FFFFFFFF",
             disappearTimer = -1,
+            outlineColor = "000000FF",
+            outlineThickness = 0,
+            scale = 1,
         }
     }
 }
@@ -20,6 +23,12 @@ roomName.fieldInformation = {
     },
     textColor = {
         fieldType = "color"
+    },
+    outlineColor = {
+        fieldType = "color"
+    },
+    scale = {
+        minimumValue = 0.01,
     },
 }
 

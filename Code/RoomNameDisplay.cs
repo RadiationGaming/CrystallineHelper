@@ -21,9 +21,15 @@ namespace Celeste.Mod.Code.Entities
 
         public Color bgColor;
         public Color textColor;
+        private Color lineColor;
         private float colorLerp;
         private Color bgColorStart;
         private Color textColorStart;
+        private Color lineColorStart;
+        private float outline;
+        private float nextOutline;
+
+        public float scale;
 
         private float outTimer;
         public RoomNameDisplay() {
@@ -77,6 +83,7 @@ namespace Celeste.Mod.Code.Entities
                 if (textLerp == 0f)
                 {
                     text = nextText;
+                    outline = nextOutline;
                 }
             }
 
@@ -98,21 +105,28 @@ namespace Celeste.Mod.Code.Entities
         public override void Render()
         {
             base.Render();
-            var y = Calc.LerpClamp(1080f, 1032f, Ease.CubeOut(drawLerp));
+            var y = Calc.LerpClamp(1080f, 1080f - (48f * scale), Ease.CubeOut(drawLerp));
             Color bgC = bgColor;
             if (colorLerp < 1f)
             {
                 bgC = Color.Lerp(bgColorStart, bgColor, colorLerp);
             }
-            Draw.Rect(-2f, y, 1920f + 4f, 48f + 2f, bgC);
+            Draw.Rect(-2f, y, 1920f + 4f, (48f * scale) + 2f, bgC);
             if (text != "")
             {
                 Color textC = textColor;
                 if (colorLerp < 1f) {
                     textC = Color.Lerp(textColorStart, textColor, colorLerp);
                 }
-                var texty = Calc.LerpClamp(1080f, 1032f, Ease.CubeOut(Calc.Min(textLerp, drawLerp)));
-                ActiveFont.Draw(text, new Vector2(960, texty - 6f), new Vector2(0.5f, 0f), new Vector2(1f, 1f), textC);
+                var texty = Calc.LerpClamp(1080f, 1080f - (48f * scale), Ease.CubeOut(Calc.Min(textLerp, drawLerp)));
+                if (outline > 0f)
+                {
+                    ActiveFont.DrawOutline(text, new Vector2(960, texty - 6f), new Vector2(0.5f, 0f), new Vector2(scale, scale), textC, outline, lineColor);
+                }
+                else
+                {
+                    ActiveFont.Draw(text, new Vector2(960, texty - 6f), new Vector2(0.5f, 0f), new Vector2(scale, scale), textC);
+                }
             }
         }
 
@@ -128,17 +142,23 @@ namespace Celeste.Mod.Code.Entities
             }
         }
 
-        public void SetColor(Color text, Color bg)
+        public void SetColor(string textHex, string bgHex, string lineHex, float amt)
         {
+            Color text = HexToColor(textHex);
+            Color bg = HexToColor(bgHex);
+            Color line = HexToColor(lineHex);
+
             if (colorLerp < 1f)
             {
                 bgColorStart = Color.Lerp(bgColorStart, bgColor, colorLerp);
                 textColorStart = Color.Lerp(textColorStart, textColor, colorLerp);
+                lineColorStart = Color.Lerp(lineColorStart, lineColor, colorLerp);
             }
             else
             {
                 bgColorStart = bgColor;
                 textColorStart = textColor;
+                lineColorStart = lineColor;
             }
             colorLerp = 0f;
             if (drawLerp == 0f)
@@ -147,6 +167,25 @@ namespace Celeste.Mod.Code.Entities
             }
             bgColor = bg;
             textColor = text;
+            lineColor = line;
+            nextOutline = amt;
+        }
+
+        // Calc.HexToColorWithAlpha does not work correctly
+        // need to do it myself
+        public Color HexToColor(string hex)
+        {
+            if (hex[0] == '#')
+            {
+                hex = hex.Substring(1);
+            }
+            Color color = Calc.HexToColor(hex);
+            if (hex.Length == 6)
+            {
+                return color;
+            }
+            float alpha = (Calc.HexToByte(hex[6]) * 16 + Calc.HexToByte(hex[7])) / 255f;
+            return color * alpha;
         }
 
         public void SetTimer(float timer)
