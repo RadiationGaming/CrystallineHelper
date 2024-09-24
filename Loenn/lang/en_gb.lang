@@ -419,6 +419,8 @@ triggers.vitellary/coyotebounce.attributes.description.directions=The sides of t
 triggers.vitellary/coyotebounce.attributes.description.refillDirections=The directions that you can regain dashes and stamina from upon collision.\n"Match Coyote" means it will match the behavior of the "Directions" field.
 triggers.vitellary/coyotebounce.attributes.description.dashTypes=What type of collision should grant the coyote frames.\nPreviously, this defaulted to "All", which was unintended behavior.
 triggers.vitellary/coyotebounce.attributes.description.setGrounded=Whether the player should be considered grounded during the coyote frame period.\nThis is NOT the vanilla behavior, and may be jank.
+triggers.vitellary/coyotebounce.attributes.description.refillDashes=Whether the 'Refill Directions' property should refill dashes or not.
+triggers.vitellary/coyotebounce.attributes.description.refillStamina=Whether the 'Refill Directions' property should refill stamina or not.
 
 # Flag Inside Trigger
 triggers.vitellary/flaginsidetrigger.attributes.description.flag=The flag to set while the player is inside the trigger.
