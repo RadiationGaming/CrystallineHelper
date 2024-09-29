@@ -14,6 +14,7 @@ roomName.placements = {
             outlineColor = "000000FF",
             outlineThickness = 0,
             scale = 1,
+            offset = 0,
         }
     }
 }

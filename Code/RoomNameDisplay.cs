@@ -18,6 +18,8 @@ namespace Celeste.Mod.Code.Entities
         private float textLerp;
         private string text;
         private string nextText;
+        private float yOffset;
+        public float nextOffset;
 
         public Color bgColor;
         public Color textColor;
@@ -84,6 +86,7 @@ namespace Celeste.Mod.Code.Entities
                 {
                     text = nextText;
                     outline = nextOutline;
+                    yOffset = nextOffset;
                 }
             }
 
@@ -105,20 +108,20 @@ namespace Celeste.Mod.Code.Entities
         public override void Render()
         {
             base.Render();
-            var y = Calc.LerpClamp(1080f, 1080f - (48f * scale), Ease.CubeOut(drawLerp));
+            var y = Calc.LerpClamp(1080f, 1080f - (48f * scale) + yOffset, Ease.CubeOut(drawLerp));
             Color bgC = bgColor;
             if (colorLerp < 1f)
             {
                 bgC = Color.Lerp(bgColorStart, bgColor, colorLerp);
             }
-            Draw.Rect(-2f, y, 1920f + 4f, (48f * scale) + 2f, bgC);
+            Draw.Rect(-2f, y, 1920f + 4f, (1080f - y) + 2f, bgC);
             if (text != "")
             {
                 Color textC = textColor;
                 if (colorLerp < 1f) {
                     textC = Color.Lerp(textColorStart, textColor, colorLerp);
                 }
-                var texty = Calc.LerpClamp(1080f, 1080f - (48f * scale), Ease.CubeOut(Calc.Min(textLerp, drawLerp)));
+                var texty = Calc.LerpClamp(1080f, 1080f - (48f * scale) + yOffset, Ease.CubeOut(Calc.Min(textLerp, drawLerp)));
                 if (outline > 0f)
                 {
                     ActiveFont.DrawOutline(text, new Vector2(960, texty - 6f), new Vector2(0.5f, 0f), new Vector2(scale, scale), textC, outline, lineColor);
