@@ -15,6 +15,7 @@ roomNameTrigger.placements = {
             scale = 1,
             oneUse = false,
             instant = false,
+            offset = 0,
         }
     }
 }

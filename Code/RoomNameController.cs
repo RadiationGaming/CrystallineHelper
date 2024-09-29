@@ -23,6 +23,7 @@ namespace Celeste.Mod.Code.Entities
         private float lineAmt;
         private float timer;
         private float scale;
+        private float yOffset;
 
         public RoomNameController(EntityData data, Vector2 offset) : base(data.Position + offset)
         {
@@ -32,6 +33,7 @@ namespace Celeste.Mod.Code.Entities
             lineColor = data.Attr("outlineColor", "000000FF");
             lineAmt = data.Float("outlineThickness", 0f);
             scale = data.Float("scale", 1f);
+            yOffset = data.Float("offset", 0f);
 
             timer = data.Float("disappearTimer", -1f);
         }
@@ -42,6 +44,7 @@ namespace Celeste.Mod.Code.Entities
             display.SetName(Name);
             display.SetColor(textColor, bgColor, lineColor, lineAmt);
             display.SetTimer(Math.Max(timer, 0f));
+            display.nextOffset = yOffset;
             display.scale = scale;
         }
     }

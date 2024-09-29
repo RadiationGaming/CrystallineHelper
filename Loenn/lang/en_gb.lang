@@ -306,6 +306,7 @@ entities.vitellary/roomname.attributes.description.textColor=The color of the ro
 entities.vitellary/roomname.attributes.description.outlineColor=The color of the text's outline, if it has one.
 entities.vitellary/roomname.attributes.description.outlineThickness=The size of the text's outline. 0 means it won't have one.
 entities.vitellary/roomname.attributes.description.scale=The scale multiplier of the room name.
+entities.vitellary/roomname.attributes.description.offset=Vertical offset of the room name. Negative values make it higher.
 entities.vitellary/roomname.attributes.description.disappearTimer=The amount of time until the room name goes away. Negative values means the text won't disappear.
 
 # Remote Trigger
@@ -408,6 +409,7 @@ triggers.vitellary/roomnametrigger.attributes.description.textColor=The color of
 triggers.vitellary/roomnametrigger.attributes.description.outlineColor=The color of the text's outline, if it has one.
 triggers.vitellary/roomnametrigger.attributes.description.outlineThickness=The size of the text's outline. 0 means it won't have one.
 triggers.vitellary/roomnametrigger.attributes.description.scale=The scale multiplier of the room name.
+triggers.vitellary/roomnametrigger.attributes.description.offset=Vertical offset of the room name. Negative values make it higher.
 triggers.vitellary/roomnametrigger.attributes.description.disappearTimer=The amount of time until the room name goes away. Negative values means the text won't disappear.
 triggers.vitellary/roomnametrigger.attributes.description.oneUse=Whether the trigger should only apply once.
 triggers.vitellary/roomnametrigger.attributes.description.instant=Whether the text and colors should instantly appear, rather than easing in.
