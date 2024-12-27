@@ -78,6 +78,7 @@ namespace vitmod
         private bool legacyBoost = true;
         private bool absoluteVector = false;
         private bool launchState = true;
+        private bool tangible = true;
 
 		public CustomPuffer(Vector2 position, bool faceRight, float angle = 0f, float radius = 32f, float launchSpeed = 280f, string spriteName = "pufferFish")
 			: base(position)
@@ -136,6 +137,7 @@ namespace vitmod
             legacyBoost = data.Bool("legacyBoost", true);
             absoluteVector = data.Bool("absoluteVector", false);
             launchState = data.Bool("setLaunchState", true);
+            tangible=data.Bool("tangible", true);
 
 			if (data.Bool("holdable"))
 			{
@@ -729,7 +731,7 @@ namespace vitmod
 
 		private void OnPlayer(Player player)
 		{
-			if (State == States.Gone || State == States.Held || !(cantExplodeTimer <= 0f))
+			if (State == States.Gone || State == States.Held || !(cantExplodeTimer <= 0f) || !tangible)
 			{
 				return;
 			}
