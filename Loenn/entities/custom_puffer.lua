@@ -24,6 +24,7 @@ customPuffer.placements = {
             legacyBoost = false,
             absoluteVector = false,
             tangible = true,
+            renderEye = true,
         }
     },
     {
@@ -48,6 +49,7 @@ customPuffer.placements = {
             legacyBoost = false,
             absoluteVector = false,
             tangible = true,
+            renderEye = true,
         }
     }
 }

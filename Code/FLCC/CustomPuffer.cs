@@ -79,6 +79,7 @@ namespace vitmod
         private bool absoluteVector = false;
         private bool launchState = true;
         private bool tangible = true;
+        private bool renderEye = true;
 
 		public CustomPuffer(Vector2 position, bool faceRight, float angle = 0f, float radius = 32f, float launchSpeed = 280f, string spriteName = "pufferFish")
 			: base(position)
@@ -138,6 +139,8 @@ namespace vitmod
             absoluteVector = data.Bool("absoluteVector", false);
             launchState = data.Bool("setLaunchState", true);
             tangible=data.Bool("tangible", true);
+            renderEye = data.Bool("renderEye", true);
+
 
 			if (data.Bool("holdable"))
 			{
@@ -149,6 +152,7 @@ namespace vitmod
 				Hold.OnPickup = OnPickup;
 				Hold.OnRelease = OnRelease;
 				Hold.SpeedGetter = (() => hitSpeed);
+				Hold.SpeedSetter = (speed) => hitSpeed = speed;
 				Add(new TransitionListener
 				{
 					OnOut = (f) => needsNewHome = true
@@ -496,7 +500,7 @@ namespace vitmod
 				}
 			}
 			base.Render();
-			if (!isHappy && sprite.CurrentAnimationID == "alerted")
+			if (renderEye && !isHappy && sprite.CurrentAnimationID == "alerted")
 			{
 				Vector2 vector3 = Position + new Vector2(3f, (Facing.X < 0f) ? (-5) : (-4)) * sprite.Scale;
 				Vector2 to = lastPlayerPos + new Vector2(0f, -4f);
@@ -735,7 +739,7 @@ namespace vitmod
 			{
 				return;
 			}
-			if (Hold != null && Input.Grab.Check && !player.Ducking && !player.IsTired)
+			if (Hold != null && Input.Grab.Check && !player.Ducking && !player.IsTired && (player.Holding == null))
 				return;
 			if (cannotHitTimer <= 0f)
 			{
